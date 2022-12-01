@@ -385,10 +385,21 @@ function ex22(a, b, c) {
 }
 
 function ex23(array) {
-  console.log('solution is comming...', array)
-
-  for (let i = 0; i < array.length; i++) {}
-  return array
+  console.log('')
+  console.log('.____________________________________________.')
+  console.log('|           Extras   EX 22                   |')
+  console.log('|                                            |')
+  console.log('|     before split', array, '         |')
+  array = String(array).split('')
+  console.log('|     after split', array)
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] == 'a') {
+      array[i] = 1
+    }
+  }
+  console.log('|                                            |')
+  console.log('|     array replaced: ', array.join(''))
+  console.log('|____________________________________________|')
 }
 
 ex1()
@@ -437,4 +448,4 @@ ex22(4, 4, 3)
 ex22(1, 2, 3)
 console.log('')
 console.log('')
-ex23(['The most beatiful word is hamburger'])
+ex23(['Javascript'])
