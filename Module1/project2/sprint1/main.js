@@ -257,7 +257,7 @@ function ex13(number) {
 }
 
 function ex14(string) {
-  let sorted = String(string).split('').reverse().sort().join('')
+  let sorted = String(string).split('').reverse().sort().join('') //turn string into array reverse it, sort it and joined again as a string
   console.log('')
   console.log('.____________________________________________.')
   console.log('|                    EX 14                   |')
@@ -271,7 +271,7 @@ function ex14(string) {
 }
 
 function ex15(string) {
-  let array = String(string).split(' ')
+  let array = String(string).split(' ') //turn string into array
   for (let i = 0; i < array.length; i++) {
     array[i] = array[i].charAt(0).toUpperCase() + array[i].slice(1) //re assign capitalizing char at 0 and joining the rest of the words with + slice1
   }
@@ -289,9 +289,8 @@ function ex15(string) {
 }
 
 function ex16(string) {
-  char = 1
-  let longest = ''
-  let array = String(string).split(' ')
+  storedIndex = 0 //small number to compare and make sure first element.length will be higher
+  let array = String(string).split(' ') //turn string into array
   console.log('.______________________________________________.')
   console.log('|                      EX 16                   |')
   console.log('|                                              |')
@@ -299,19 +298,97 @@ function ex16(string) {
     console.log('|   index:  ', i, ' age:  ', array[i], '      ')
   }
   for (let i = 0; i < array.length; i++) {
-    if (array[i].length > char) {
-      char = i
+    if (array[i].length > storedIndex) {
+      storedIndex = i //store the index to later show on the array
     }
   }
   console.log('|                                               |')
-  console.log('|  Longest word : ', array[char], '             |')
+  console.log('|  Longest word : ', array[storedIndex], '             |')
   console.log('|_______________________________________________|')
   console.log('')
   console.log('')
 }
 
 function ex19() {
-  console.log('Multiplication (9x2) =', 19 * 2)
+  console.log('')
+  console.log('.____________________________________________.')
+  console.log('|           Extras   EX 19                   |')
+  console.log('|                                            |')
+  console.log('|         Multiplication (9x2) =', 19 * 2, '         |')
+  console.log('|____________________________________________|')
+  console.log('')
+  //no arguments, no return, just a simple console.log
+}
+
+function ex20() {
+  console.log('')
+  console.log('.____________________________________________.')
+  console.log('|           Extras   EX 20                   |')
+  console.log('|                                            |')
+  console.log('|         Multiplication (9x2) =', 19 * 2, '         |')
+  console.log('|____________________________________________|')
+  console.log('')
+  console.log('')
+  console.log('')
+  return 9 * 2 //the return
+}
+
+function ex21(x, y, iteration) {
+  console.log('.____________________________________________.')
+  console.log('|           Extras   EX 21                   |')
+  console.log('|             OUTCOME #', iteration, '                   |')
+  console.log('|         Multiplication: (', x, 'x', y, ') =', x * y, '   |')
+  console.log('|____________________________________________|')
+  console.log('')
+  return x * y //the return
+}
+
+function ex22(a, b, c) {
+  let triangle
+  if (a === b && a === c) {
+    triangle = 'all sides are equal'
+  } else if (a === b && a !== c) {
+    triangle = 'two sides equal    '
+  } else {
+    triangle = 'all sides different'
+  }
+
+  console.log('.____________________________________________.')
+  console.log('|           Extras   EX 22                   |')
+  console.log(
+    '|         Triangle sides: ' + ' ' + a + ' ' + b + ' ' + c,
+    '            |'
+  )
+  console.log('|       Result: ' + triangle + '          |')
+  console.log('|____________________________________________|')
+
+  return triangle
+
+  // switch broken
+  // switch ((a, b, c)) {
+  //   case (a === b) !== c: {
+  //     console.log('all sides are equal') // code block
+  //     break
+  //   }
+  //   case (a !== b) !== c: {
+  //     console.log('A and B equals, C different') // code block
+  //     // code block
+  //     break
+  //   }
+  //   case (a === b) === c: {
+  //     console.log('all sides are equal') // code block
+  //     break
+  //   }
+  //   default:
+  //     console.log('default') // code block
+  // }
+}
+
+function ex23(array) {
+  console.log('solution is comming...', array)
+
+  for (let i = 0; i < array.length; i++) {}
+  return array
 }
 
 ex1()
@@ -347,3 +424,17 @@ ex15('prince of persia')
 ex16('the shortest word youwilleverread')
 
 ex19()
+
+ex20()
+
+ex21(2, 30, 1) // last argument outcome 1
+ex21(3, 20, 2) // last argument outcome 2
+ex21(4, 12, 3) // last argument outcome 3
+console.log('')
+console.log('')
+ex22(4, 4, 4)
+ex22(4, 4, 3)
+ex22(1, 2, 3)
+console.log('')
+console.log('')
+ex23(['The most beatiful word is hamburger'])
