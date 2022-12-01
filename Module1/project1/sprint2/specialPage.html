@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/2f1a5ebe77.js" crossorigin="anonymous"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link rel="shortcut icon" type="image/png" href="./assets/favicon.png " />
+    <title>Berlin Resto || by Santaigo Manso Castro Fullstack developer</title>
+</head>
+<body class="bg-gradient-to-br from-slate-500 to-gray-200 flex justify-center lg:items-center h-screen">
+
+  <button class="w-10 bg-white/40 rounded-md lg:hidden fixed top-2 right-5 z-10" id="navOpen">
+    <i class="text-2xl sm:text-4xl fa-solid fa-bars"></i>
+</button>
+<aside id="aside" class="-translate-x-full duration-300 flex lg:hidden bg-gradient-to-br from-black/95
+to-slate-900/90 via-black/95 w-full h-full absolute
+                        top-0 left-0 z-20  text-white  justify-center pt-20 select-none">
+    <button class="w-10 lg:hidden fixed top-2 right-5 z-30" id="navClose">
+        <i class="text-2xl text-white sm:text-4xl fa-solid fa-bars"></i>
+    </button>
+    <ul class="flex flex-col gap-24 text-center font-black">
+        <a href="./index.html" class="text-3xl">Home</a>
+        <a href="./registration.html" class="text-3xl">Reservation</a>
+        <a href="./test.html" class="text-3xl">Plain CSS</a>
+        <a href="./specialPage.html" class="text-3xl border-b-[6px] border-indigo-400">Special Page</a>
+        <a href="./contact.html" class="text-3xl">Contact</a>
+    </ul>
+</aside>
+
+    <div class="bg-gradient-to-b from-white to-gray-200/90 shadow-2xl max-w-[1280px] w-full h-full lg:h-2/3 lg:rounded-xl px-2 md:px-16 lg:px-5 py-6 overflow-auto lg:overflow-hidden">
+      <nav class="hidden lg:flex justify-between select-none">
+        <a class="flex gap-1 items-baseline hover:border-b-4 hover:border-indigo-400" href="./index.html">
+            <i class="text-indigo-600 fa-solid fa-house"></i>
+            <span class="font-bold">Home</span>
+        </a>
+        <div class="flex md:gap-10 lg:gap-10">
+            <a class="hover:border-b-4 hover:border-indigo-400" href="./registration.html">Registration</a>
+            <a class="border-b-4 border-indigo-400" href="./specialPage.html">Special page</a>
+            <a class="hover:border-b-4 hover:border-indigo-400" href="./test.html">Plain css</a>
+            <a class="hover:border-b-4 hover:border-indigo-400" href="./contact.html">Contact</a>
+        </div>
+    </nav>
+        <main class="animate__animated animate__fadeIn flex flex-col lg:flex-row h-full select-none">
+            <div class="hidden lg:flex flex-col justify-center items-center gap-y-4 w-1/2  drop-shadow-xl select-none group">
+                <i class="drop-shadow-lg text-7xl text-amber-700/80 group-hover:rotate-0 group-hover:scale-125 duration-1000 -rotate-6 fa-solid fa-utensils"></i>
+                <h1 class="text-6xl font-bold text-center">Bookins</h1>
+                <h3 class=" font-sans text-xl">Search your booking and modify as you wish!</h3>
+                <a href="./registration.html" class="flex justify-center px-4 py-3 bg-gradient-to-br from-indigo-700 to-indigo-500 rounded-md text-white text-xl">Book a table!</a>
+            </div>
+
+            <div class="w-full lg:w-3/4 flex items-start">
+                <table class="hidden md:table table-auto mt-2 w-full border-separate border-spacing-y-3">
+                    <thead class="border-2 border-b-gray-300 text-left">
+                      <tr>
+                        <th>Booking</th>
+                        <th>Restaurant</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">Guests</th>
+                        <th class="text-center">Date</th>
+                        <th class="text-right">Time</th>
+                      </tr>
+                    </thead>
+                    <tbody class="">
+                      <tr class="hover:bg-indigo-300">
+                        <td>Phillip Meister</td>
+                        <td>Borchardt</td>
+                        <td class="bg-green-300/50 text-center rounded-lg text-green-600 font-medium">On Time</td>
+                        <td class="text-center">2</td>
+                        <td class="text-center">24-11</td>
+                        <td class="text-right">19:00</td>
+                      </tr>
+                      <tr class="hover:bg-indigo-300">
+                        <td>Lina Ambrosio</td>
+                        <td>MontRaw Berlin</td>
+                        <td class="text-center text-red-400 bg-red-200 rounded-md">Cancelled</td>
+                        <td class="text-center">8</td>
+                        <td class="text-center">25-11</td>
+                        <td class="text-right">18:45</td>
+                      </tr>
+                    </tr>
+                    <tr class="hover:bg-indigo-300">
+                      <td>Joe Balbuena</td>
+                      <td>Borchardt</td>
+                      <td class="text-center bg-amber-200 rounded-md text-yellow-600/70 font-medium">Delayed</td>
+                      <td class="text-center">3</td>
+                      <td class="text-center">28-11</td>
+                      <td class="text-right">17:30</td>
+                  </tr>
+                      <tr class="hover:bg-indigo-300">
+                        <td>Leonora Walsch</td>
+                        <td>Borchardt</td>
+                        <td class="bg-green-300/50 text-center rounded-lg text-green-600 font-medium">On Time</td>
+                        <td class="text-center">1</td>
+                        <td class="text-center">29-11</td>
+                        <td class="text-right">18:00</td>
+                      </tr>
+                      <tr class="hover:bg-indigo-300">
+                        <td>Sofia McBurney</td>
+                        <td>MontRaw Berlin</td>
+                        <td class="text-center bg-amber-200 rounded-md text-yellow-600/70 font-medium">Delayed</td>
+                        <td class="text-center">5</td>
+                        <td class="text-center">30-11</td>
+                        <td class="text-right">20:00</td>
+                      </tr>
+                      <tr class="hover:bg-indigo-300">
+                        <td>Esteban Quito</td>
+                        <td>Borchardt</td>
+                        <td class="bg-green-300/50 text-center rounded-lg text-green-600 font-medium">On Time</td>
+                        <td class="text-center">2</td>
+                        <td class="text-center">01-12</td>
+                        <td class="text-right">22:30</td>
+                        </tr>
+                      <tr class="hover:bg-indigo-300">
+                        <td>Stephanie Bach</td>
+                        <td>Borchardt</td>
+                        <td class="bg-green-300/50 text-center rounded-lg text-green-600 font-medium">On Time</td>
+                        <td class="text-center">5</td>
+                        <td class="text-center">03-12</td>
+                        <td class="text-right">21:15</td>
+                    </tr>
+                      <tr class="hover:bg-indigo-300">
+                        <td>Code Academy Berlin</td>
+                        <td>MontRaw Berlin</td>
+                        <td class="text-center text-red-400 bg-red-200 rounded-md">Cancelled</td>
+                        <td class="text-center">13</td>
+                        <td class="text-center">04-12</td>
+                        <td class="text-right">20:45</td>
+                      <tr class="hover:bg-indigo-300">
+                        <td>Phillip Meister</td>
+                        <td>MontRaw Berlin</td>
+                        <td class="bg-green-300/50 text-center rounded-lg text-green-600 font-medium">On Time</td>
+                        <td class="text-center">4</td>
+                        <td class="text-center">14-12</td>
+                        <td class="text-right">17:30</td>
+                      </tr>
+                      <tr class="hover:bg-indigo-300">
+                        <td>Charlotte Wilheim</td>
+                        <td>Borchardt</td>
+                        <td class="text-center text-red-400 bg-red-200 rounded-md">Cancelled</td>
+                        <td class="text-center">3</td>
+                        <td class="text-center">24-12</td>
+                        <td class="text-right">18:45</td>
+                      </tr>
+                      <tr class="hover:bg-indigo-300">
+                        <td>Phillip Meister</td>
+                        <td>MontRaw Berlin</td>
+                        <td class="bg-green-300/50 text-center rounded-lg text-green-600 font-medium">On Time</td>
+                        <td class="text-center">2</td>
+                        <td class="text-center">30-12</td>
+                        <td class="text-right">19:00</td>
+                      </tr>
+                      
+                    </tbody>
+                </table>    
+            </div>
+            <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
+              <div class="hover:scale-[1.03] hover:rotate-1 duration-300 bg-gradient-to-bl from-amber-300/30 to-white via-gray-200/50 p-4 rounded-lg shadow">
+                <div class="flex items-center justify-between text-sm sm:text-xs">
+                  <span class="">MontRaw Berlin</span>
+                  <div class="flex space-x-2">
+                    <span class="">24/11</span>
+                    <span class=" px-2 text-center rounded-lg bg-amber-100 text-amber-500 font-medium">Delayed</span>
+                    <div>Table for: 7</div>
+                  </div>
+                </div>
+                <div class="mt-1">Jane Fonda</div>
+                <div class="flex items-center justify-between">
+                  <span>19:30</span>
+                  <div class="flex space-x-10 text-lg">
+                    <i class="fa-regular fa-eye text-gray-600"></i>
+                    <i class="fa-solid fa-pen-to-square text-gray-600"></i>
+                    <i class="fa-solid fa-trash text-gray-600"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="hover:scale-[1.03] hover:rotate-1 duration-300 bg-gradient-to-bl from-red-300/30 to-white via-gray-200/50 p-4 rounded-lg shadow">
+                <div class="flex items-center justify-between text-sm sm:text-xs">
+                  <span class="">MontRaw Berlin</span>
+                  <div class="flex space-x-2">
+                    <span class="">24/11</span>
+                    <span class="px-2 text-center rounded-lg text-red-400 bg-red-200 font-medium">Cancelled</span>
+                    <div>Table for: 3</div>
+                  </div>
+                </div>
+                <div class="mt-1">Axl Rose</div>
+                <div class="flex items-center justify-between">
+                  <span>09:00</span>
+                  <div class="flex space-x-10 text-lg">
+                    <i class="fa-regular fa-eye text-gray-600/40"></i>
+                    <i class="fa-solid fa-pen-to-square text-gray-600/40"></i>
+                    <i class="fa-solid fa-trash text-gray-600/40"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="hover:scale-[1.03] hover:rotate-1 duration-300 bg-gradient-to-bl from-green-400/30 to-white via-gray-200/50 p-4 rounded-lg shadow">
+                <div class="flex items-center justify-between text-sm sm:text-xs">
+                  <span class="">MontRaw Berlin</span>
+                  <div class="flex space-x-2">
+                    <span class="">24/11</span>
+                    <span class="bg-green-300/50 px-2 text-center rounded-lg text-green-600 font-medium">On time</span>
+                    <div>Table for: 3</div>
+                  </div>
+                </div>
+                <div class="mt-1">Eric Clapton</div>
+                <div class="flex items-center justify-between">
+                  <span>12:00</span>
+                  <div class="flex space-x-10 text-lg">
+                    <i class="fa-regular fa-eye text-gray-600"></i>
+                    <i class="fa-solid fa-pen-to-square text-gray-600"></i>
+                    <i class="fa-solid fa-trash text-gray-600"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="hover:scale-[1.03] hover:rotate-1 duration-300 bg-gradient-to-bl from-green-400/30 to-white via-gray-200/50 p-4 rounded-lg shadow">
+                <div class="flex items-center justify-between text-sm sm:text-xs">
+                  <span class="">MontRaw Berlin</span>
+                  <div class="flex space-x-2">
+                    <span class="">24/11</span>
+                    <span class="bg-green-300/50 px-2 text-center rounded-lg text-green-600 font-medium">Delayed</span>
+                    <div>Table for: 3</div>
+                  </div>
+                </div>
+                <div class="mt-1">Dua Lipa</div>
+                <div class="flex items-center justify-between">
+                  <span>13:30</span>
+                  <div class="flex space-x-10 text-lg">
+                    <i class="fa-regular fa-eye text-gray-600"></i>
+                    <i class="fa-solid fa-pen-to-square text-gray-600"></i>
+                    <i class="fa-solid fa-trash text-gray-600"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="hover:scale-[1.03] hover:rotate-1 duration-300 bg-gradient-to-bl from-red-300/30 to-white via-gray-200/50 p-4 rounded-lg shadow">
+                <div class="flex items-center justify-between text-sm sm:text-xs">
+                  <span class="">MontRaw Berlin</span>
+                  <div class="flex space-x-2">
+                    <span class="">24/11</span>
+                    <span class="px-2 text-center rounded-lg text-red-400 bg-red-200 font-medium">Cancelled</span>
+                    <div>Table for: 5</div>
+                  </div>
+                </div>
+                <div class="mt-1">Michael Schumacher</div>
+                <div class="flex items-center justify-between">
+                  <span>19:30</span>
+                  <div class="flex space-x-10 text-lg">
+                    <i class="fa-regular fa-eye text-gray-600/40"></i>
+                    <i class="fa-solid fa-pen-to-square text-gray-600/40"></i>
+                    <i class="fa-solid fa-trash text-gray-600/40"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="hover:scale-[1.03] hover:rotate-1 duration-300 bg-gradient-to-bl from-amber-300/30 to-white via-gray-200/50 p-4 rounded-lg shadow">
+                <div class="flex items-center justify-between text-sm sm:text-xs">
+                  <span class="">MontRaw Berlin</span>
+                  <div class="flex space-x-2">
+                    <span class="">24/11</span>
+                    <span class=" px-2 text-center rounded-lg bg-amber-100 text-amber-500 font-medium">Delayed</span>
+                    <div>Table for: 5</div>
+                  </div>
+                </div>
+                <div class="mt-1">Lionel Messi</div>
+                <div class="flex items-center justify-between">
+                  <span>11:00</span>
+                  <div class="flex space-x-10 text-lg">
+                    <i class="fa-regular fa-eye text-gray-600"></i>
+                    <i class="fa-solid fa-pen-to-square text-gray-600"></i>
+                    <i class="fa-solid fa-trash text-gray-600"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="hover:scale-[1.03] hover:rotate-1 duration-300 bg-gradient-to-bl from-green-400/30 to-white via-gray-200/50 p-4 rounded-lg shadow">
+                <div class="flex items-center justify-between text-sm sm:text-xs">
+                  <span class="">MontRaw Berlin</span>
+                  <div class="flex space-x-2">
+                    <span class="">24/11</span>
+                    <span class="bg-green-300/50 px-2 text-center rounded-lg text-green-600 font-medium">On Time</span>
+                    <div>Table for: 10</div>
+                  </div>
+                </div>
+                <div class="mt-1">Berlin Code Academy</div>
+                <div class="flex items-center justify-between">
+                  <span>20:30</span>
+                  <div class="flex space-x-10 text-lg">
+                    <i class="fa-regular fa-eye text-gray-600"></i>
+                    <i class="fa-solid fa-pen-to-square text-gray-600"></i>
+                    <i class="fa-solid fa-trash text-gray-600"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="hover:scale-[1.03] hover:rotate-1 duration-300 bg-gradient-to-bl from-green-400/30 to-white via-gray-200/50 p-4 rounded-lg shadow">
+                <div class="flex items-center justify-between text-sm sm:text-xs">
+                  <span class="">MontRaw Berlin</span>
+                  <div class="flex space-x-2">
+                    <span class="">24/11</span>
+                    <span class="bg-green-300/50 px-2 text-center rounded-lg text-green-600 font-medium">On Time</span>
+                    <div>Table for: 10</div>
+                  </div>
+                </div>
+                <div class="mt-1">Michael Jackson</div>
+                <div class="flex items-center justify-between">
+                  <span>20:30</span>
+                  <div class="flex space-x-10 text-lg">
+                    <i class="fa-regular fa-eye text-gray-600"></i>
+                    <i class="fa-solid fa-pen-to-square text-gray-600"></i>
+                    <i class="fa-solid fa-trash text-gray-600"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="hover:scale-[1.03] hover:rotate-1 duration-300 bg-gradient-to-bl from-red-300/30 to-white via-gray-200/50 p-4 rounded-lg shadow">
+                <div class="flex items-center justify-between text-sm sm:text-xs">
+                  <span class="">MontRaw Berlin</span>
+                  <div class="flex space-x-2">
+                    <span class="">24/11</span>
+                    <span class="px-2 text-center rounded-lg text-red-400 bg-red-200 font-medium">Cancelled</span>
+                    <div>Table for: 2</div>
+                  </div>
+                </div>
+                <div class="mt-1">Blink 182</div>
+                <div class="flex items-center justify-between">
+                  <span>17:30</span>
+                  <div class="flex space-x-10 text-lg">
+                    <i class="fa-regular fa-eye text-gray-600/40"></i>
+                    <i class="fa-solid fa-pen-to-square text-gray-600/40"></i>
+                    <i class="fa-solid fa-trash text-gray-600/40"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="hover:scale-[1.03] hover:rotate-1 duration-300 bg-gradient-to-bl from-amber-300/30 to-white via-gray-200/50 p-4 rounded-lg shadow">
+                <div class="flex items-center justify-between text-sm sm:text-xs">
+                  <span class="">MontRaw Berlin</span>
+                  <div class="flex space-x-2">
+                    <span class="">24/11</span>
+                    <span class=" px-2 text-center rounded-lg bg-amber-100 text-amber-500 font-medium">Delayed</span>
+                    <div>Table for: 7</div>
+                  </div>
+                </div>
+                <div class="mt-1">Brad & Angelina</div>
+                <div class="flex items-center justify-between">
+                  <span>22:30</span>
+                  <div class="flex space-x-10 text-lg">
+                    <i class="fa-regular fa-eye text-gray-600"></i>
+                    <i class="fa-solid fa-pen-to-square text-gray-600"></i>
+                    <i class="fa-solid fa-trash text-gray-600"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="hover:scale-[1.03] hover:rotate-1 duration-300 bg-gradient-to-bl from-green-400/30 to-white via-gray-200/50 p-4 rounded-lg shadow">
+                <div class="flex items-center justify-between text-sm sm:text-xs">
+                  <span class="">MontRaw Berlin</span>
+                  <div class="flex space-x-2">
+                    <span class="">24/11</span>
+                    <span class="bg-green-300/50 px-2 text-center rounded-lg text-green-600 font-medium">On Time</span>
+                    <div>Table for: 7</div>
+                  </div>
+                </div>
+                <div class="mt-1">Stuart Little</div>
+                <div class="flex items-center justify-between">
+                  <span>22:00</span>
+                  <div class="flex space-x-10 text-lg">
+                    <i class="fa-regular fa-eye text-gray-600"></i>
+                    <i class="fa-solid fa-pen-to-square text-gray-600"></i>
+                    <i class="fa-solid fa-trash text-gray-600"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="hover:scale-[1.03] hover:rotate-1 duration-300 bg-gradient-to-bl from-red-300/30 to-white via-gray-200/50 p-4 rounded-lg shadow">
+                <div class="flex items-center justify-between text-sm sm:text-xs">
+                  <span class="">MontRaw Berlin</span>
+                  <div class="flex space-x-2">
+                    <span class="">24/11</span>
+                    <span class="px-2 text-center rounded-lg text-red-400 bg-red-200 font-medium">Cancelled</span>
+                    <div>Table for: 7</div>
+                  </div>
+                </div>
+                <div class="mt-1">Ratatouille</div>
+                <div class="flex items-center justify-between">
+                  <span>23:00</span>
+                  <div class="flex space-x-10 text-lg">
+                    <i class="fa-regular fa-eye text-gray-600/40"></i>
+                    <i class="fa-solid fa-pen-to-square text-gray-600/40"></i>
+                    <i class="fa-solid fa-trash text-gray-600/40"></i>
+                  </div>
+                </div>
+              </div>
+            </div>              
+            <div class="mt-10 lg:hidden flex flex-col justify-center items-center gap-y-4 w-full  drop-shadow-xl select-none group">
+              <i class="drop-shadow-lg text-7xl text-amber-700/80 group-hover:rotate-0 group-hover:scale-125 duration-1000 -rotate-6 fa-solid fa-utensils"></i>
+              <h1 class="text-6xl font-bold text-center">Bookins</h1>
+              <h3 class=" font-sans text-xl">Search your booking and modify as you wish!</h3>
+              <a href="./registration.html" class="w-full md:w-2/3 flex justify-center px-4 py-3 bg-gradient-to-br from-indigo-700 to-indigo-500 rounded-md text-white text-xl">Book a table!</a>
+          </div>
+        </main>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>

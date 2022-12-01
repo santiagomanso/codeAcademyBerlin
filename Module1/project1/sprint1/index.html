@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/2f1a5ebe77.js" crossorigin="anonymous"></script>
+    <title>Santiago Manso Castro || Fullstack Developer</title>
+</head>
+<body class="bg-gradient-to-br from-indigo-500 to-cyan-400 h-screen">
+    <nav class="bg-white text-gray-600 md:px-10 lg:px-40 mx-auto py-3 select-none">
+        <ul class="flex justify-between text-lg">
+            <li class="flex gap-2 items-center hover:scale-105 duration-300 cursor-pointer">
+                <i class="fa-solid fa-house"></i>
+                <a href="./index.html">Home</a>
+            </li>
+            <li class="flex gap-10">
+                <div class="flex gap-2 items-center hover:scale-105 duration-300 cursor-pointer">
+                    <i class="fa-solid fa-address-card"></i>
+                    <a href="about.html">About</a>
+                </div>
+                <div class="flex gap-2 items-center hover:scale-105 duration-300 cursor-pointer">
+                    <i class="fa-solid fa-user"></i>
+                    <a href="mailto:mansi.manito@gmail.com">Contact</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <div class="parent max-w-[1600px] mx-auto flex justify-center items-center w-full">    
+        <section class="w-full bg-white lg:mt-10 lg:p-5 lg:rounded-lg flex flex-col gap-y-14 lg:gap-y-0 lg:flex-row justify-center lg:justify-between">
+            <article class="w-full lg:w-[32.5%] md:p-4 group">
+                <div class="overflow-hidden rounded-lg"> <!-- div wrap image to make scale effect modern -->
+                    <a target="_blank" href="https://tailwindcss.com/" ><img class="w-full object-center h-[270px] group-hover:scale-125 group-hover:-rotate-3 duration-1000" src="https://kinsta.com/de/wp-content/uploads/sites/5/2022/03/tailwind-css-1024x512.jpg" alt=""></a>
+                </div>
+                <h1 class="text-3xl text-center text-gray-600 font-bold mb-2 mt-3">Why i love TailwindCss</h1>
+                <p class="text-gray-700">It's easy to do media queries with just a single line of code. alltough it can make the code dirty or <a target="_blank" href="https://en.wikipedia.org/wiki/Lionel_Messi" class="text-blue-500 font-bold underline">MESSI <i class="fa-solid fa-heart text-red-500"></i></a>, it is possible to refactorize into it's own individual css files leaving plain HTML lines</p>
+            </article>
+            <article class="w-full lg:w-[32.5%] md:p-4 group">
+                <div class="overflow-hidden rounded-lg"> <!-- div wrap image to make scale effect modern -->
+                    <a target="_blank" href="https://reactjs.org/"><img class="w-full object-center h-[270px] group-hover:scale-125 group-hover:rotate-3 duration-1000" src="https://www.valuecoders.com/blog/wp-content/uploads/2016/08/react.png" alt=""></a>
+                </div>
+                <h1 class="text-3xl text-center text-gray-600 font-bold mb-2 mt-3">React for the win</h1>
+                <p class="text-gray-700">One of the most popular Javascript libraries, easy to work with (except useEffect). I think it works great with tailwind with boolean states that enables or disables certain styles</p>
+            </article>
+            <article class="w-full lg:w-[32.5%] md:p-4 group">
+                <div class="overflow-hidden rounded-lg"> <!-- div wrap image to make scale effect modern -->
+                    <a target="_blank" href="https://firebase.google.com/"><img class="w-full object-center h-[270px] group-hover:scale-125 group-hover:-rotate-3 duration-1000" src="https://res.cloudinary.com/practicaldev/image/fetch/s--XnV7nLnZ--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://thepracticaldev.s3.amazonaws.com/i/cufhvx44o66bb32ll2l8.png" alt=""></a>
+                </div>
+                <h1 class="text-3xl text-center text-gray-600 font-bold mb-2 mt-3">Let's go Firebase</h1>
+                <p class="text-gray-700">Made by google, what can go wrong?</p> 
+                <div class="flex flex-col text-gray-700">
+                    <span>Sign-in with google button? you got it <i class="fa-solid fa-check text-green-600 text-2xl font-bold"></i></span> 
+                    <span>create user with email/password? <i class="fa-solid fa-check text-green-600 text-2xl font-bold"></i></span>
+                    <span>Guests accounts? you betcha <i class="fa-solid fa-check text-green-600 text-2xl font-bold"></i></span></div>
+            </article>
+        </section>
+    </div>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <!-- tailwind content delivery network -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- font awsome CDN -->
+    <script
+      src="https://kit.fontawesome.com/2f1a5ebe77.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- animations cdn -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link rel="shortcut icon" type="image/png" href="./assets/favicon.png " />
+    <title>Berlin Resto || by Santaigo Manso Castro Fullstack developer</title>
+  </head>
+
+  <!-- Gradient to bottom right and on LG centered vertically -->
+  <body
+    class="bg-gradient-to-br from-slate-500 to-gray-200 flex justify-center lg:items-center h-screen"
+  >
+    <!-- btn Open fixed on top right Hidden on LG. later listened by JavaScript -->
+    <button
+      class="w-10 bg-white/40 rounded-md lg:hidden fixed top-2 right-5 z-10"
+      id="navOpen"
+    >
+      <i class="text-2xl sm:text-4xl fa-solid fa-bars"></i>
+    </button>
+
+    <!-- Mobile Nav Menu, slides from left to right. sits on top left absolute -->
+    <aside
+      id="aside"
+      class="-translate-x-full duration-300 flex lg:hidden bg-gradient-to-br from-black/95 to-slate-900/90 via-black/95 w-full h-full absolute top-0 left-0 z-20 text-white justify-center pt-20 select-none"
+    >
+      <!-- close btn sits in the spot as open btn -->
+      <button class="w-10 lg:hidden fixed top-2 right-5 z-30" id="navClose">
+        <i class="text-2xl text-white sm:text-4xl fa-solid fa-bars"></i>
+      </button>
+
+      <!-- NAV ITEMS centered super heavy font -->
+      <ul class="flex flex-col gap-24 text-center font-black">
+        <!-- Display Actual page -->
+        <a href="./index.html" class="text-3xl border-b-[6px] border-indigo-400"
+          >Home</a
+        >
+        <a href="./registration.html" class="text-3xl">Reservation</a>
+        <a href="./specialPage.html" class="text-3xl">Special Page</a>
+        <a href="./test.html" class="text-3xl">Plain CSS</a>
+        <a href="./contact.html" class="text-3xl">Contact</a>
+      </ul>
+
+      <!-- End mobile responsive nav menu -->
+    </aside>
+
+    <!-- Main component centered and responsive -->
+    <main
+      class="bg-gradient-to-b from-white to-gray-200/90 shadow-2xl max-w-[1280px] w-full h-full lg:h-2/3 lg:rounded-[5px] px-2 md:px-24 lg:px-5 py-6 overflow-auto lg:overflow-hidden"
+    >
+      <!-- PC navigation hidden by default only shows on LG and on.. -->
+      <!-- |____HOME____|    |____DIV____| -->
+      <nav class="hidden lg:flex justify-between select-none">
+        <!-- Show where we are browsing -->
+        <a
+          class="flex gap-1 items-baseline border-b-4 border-indigo-400"
+          href="./index.html"
+        >
+          <i class="text-indigo-600 fa-solid fa-house"></i>
+          <span class="font-bold">Home</span>
+        </a>
+
+        <!-- Elements pushed to the right hover border -->
+        <div class="flex md:gap-10 lg:gap-10">
+          <a
+            class="hover:border-b-4 hover:border-indigo-400"
+            href="./registration.html"
+            >Registration</a
+          >
+          <a
+            class="hover:border-b-4 hover:border-indigo-400"
+            href="./specialPage.html"
+            >Special page</a
+          >
+          <a class="hover:border-b-4 hover:border-indigo-400" href="./test.html"
+            >Plain css</a
+          >
+          <a
+            class="hover:border-b-4 hover:border-indigo-400"
+            href="./contact.html"
+            >Contact</a
+          >
+        </div>
+      </nav>
+
+      <!-- default (responsiveness) flex col / breakpoint LG:flex-row -->
+      <!-- pc: LEFT container (best food) CARD1 CARD2 - mobile/tablet column 1 -->
+      <section class="flex flex-col lg:flex-row h-full items-center">
+        <!-- LEFT container wfull resp PC: width 50% row first card -->
+        <div
+          class="group lg:w-1/2 flex flex-col justify-center items-center gap-y-4 drop-shadow-xl select-none mb-5 sm:mb-16"
+        >
+          <i
+            class="drop-shadow-lg text-7xl text-amber-700/80 group-hover:rotate-0 group-hover:scale-125 duration-1000 -rotate-[245deg] fa-solid fa-burger -translate-x-[350px] group-hover:translate-x-0"
+          ></i>
+          <h1 class="text-6xl font-bold text-center">
+            Best Food around Berlin!
+          </h1>
+          <h3 class="text-center px-10 lg:px-2 font-sans text-xl">
+            A collection of restaurants around
+            <span class="text-indigo-600 lg:text-current lg:text-lg"
+              >the place to be</span
+            >
+          </h3>
+          <a
+            href="./registration.html"
+            class="px-5 py-3 bg-gradient-to-br from-indigo-400 to-rose-200 rounded text-xl font-medium hover:font-bold text-slate-600 hover:-translate-y-1 duration-300 hover:-rotate-1 hover:scale-[1.05]"
+            >I want the best table!</a
+          >
+        </div>
+
+        <!-- RIght COntainer where both CARD1 CARD2 sits this column responsive -->
+        <div
+          class="w-full lg:w-3/4 flex flex-col gap-y-10 lg:gap-y-0 lg:flex-row lg:items-center justify-between"
+        >
+          <!-- CARD 1 width full RESPONSIVE w 350px PC -->
+          <article
+            class="bg-gradient-to-b from-gray-600/80 to-white w-full lg:w-[350px] h-[420px] overflow-auto group shadow-lg rounded-xl p-2"
+          >
+            <!-- img container OVERFLOW to do animation showcase -->
+            <div class="w-full overflow-hidden h-[200px] rounded-lg">
+              <!-- effect on hover scales but without going outside container due to container with overflow hidden ;)  -->
+              <img
+                class="w-full object-cover rounded-xl group-hover:scale-125 group-hover:rotate-[2deg] duration-[3s]"
+                src="https://www.nikos-weinwelten.de/fileadmin/user_upload/montgesa.JPG"
+                alt=""
+              />
+            </div>
+            <h2 class="text-lg font-semibold mt-3 mb-1">MontRaw Berlin</h2>
+            <p class="text-sm">
+              Das in 2018 eröffnete Restaurant MontRaw in der Strassburger
+              Straße 33 in Berlin Prenzlauer Berg ist in die Torstraße 189 in
+              Mitte umgezogen. Die alte Geschäftsfläche wurde zur 'Mezze Bar -
+              by MontRaw’ und in der Torstraße gibt es nun wieder die
+              umfangreichere arabisch/israelische Küche von Chefkoch Ben Barabi.
+            </p>
+          </article>
+
+          <!-- CARD 2 -->
+          <article
+            class="bg-gradient-to-b from-gray-600/80 to-white w-full lg:w-[350px] h-[420px] overflow-auto group shadow-lg rounded-xl p-2"
+          >
+            <div class="w-full overflow-hidden h-[200px] rounded-lg">
+              <img
+                class="w-full object-cover rounded-xl group-hover:scale-125 group-hover:rotate-[2deg] duration-[3s]"
+                src="https://www.glint-berlin.de/wp-content/uploads/2019/04/Berlin-Mitte-Restaurant-1920x1281.jpg"
+                alt=""
+              />
+            </div>
+            <h2 class="text-lg font-semibold mt-3 mb-1">Borchardt</h2>
+            <p class="text-sm">
+              Dazu zählen Institutionen wie das Catch LA in Los Angeles genauso
+              wie das L’Avenue in Paris. In Berlin-Mitte ist es das Restaurant
+              Borchardt, das diese spezielle Wirkung auf die High Society hat.
+              Hier speisten schon George Clooney, Natalie Portman, Tom Cruise
+              und Barack Obama.
+            </p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <!-- little script to make responsive nav work -->
+    <script src="main.js"></script>
+  </body>
+</html>
