@@ -20,10 +20,67 @@ a:focus {
   --primary-color-light: #f6f5ff;
   --toggle-color: #ddd;
   --text-color: #707070;
+  --primary: #2f9721;
+  --secondary: #008fff;
+  --warning: #ff794f;
 
   /* transitions */
   --tran-03: all 0.2s ease;
   --tran-04: all 0.3s ease;
   --tran-05: all 0.4s ease;
   --tran-06: all 0.5s ease;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #939393;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #ffca2c;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #f6c124;
+}
+
+.icon:hover {
+  cursor: pointer;
+}
+
+.icon-view:hover {
+  color: var(--primary);
+}
+
+.icon-edit:hover {
+  color: var(--secondary);
+}
+
+.icon-delete:hover {
+  color: var(--warning);
+}
+
+.bg-custom1 {
+  background: rgb(88, 87, 87);
+  background: linear-gradient(
+    140deg,
+    rgba(88, 87, 87, 1) 0%,
+    rgba(145, 164, 182, 1) 100%
+  );
+}
+
+.bg-custom2 {
+  background: rgb(227, 231, 225);
+  background: linear-gradient(
+    140deg,
+    rgba(227, 231, 225, 1) 0%,
+    rgba(145, 151, 159, 1) 100%
+  );
 }

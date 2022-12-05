@@ -1,5 +1,5 @@
 // random bed function
-const randomBed = () => {
+const randomRoom = () => {
   return Math.floor(Math.random() * 10 + 1)
 }
 
@@ -33,18 +33,24 @@ const fetchData = async () => {
 }
 
 const printData = (data) => {
-  console.log('data', data)
+  // console.log('data', data)
   let grid = document.getElementById('col')
+
   for (let i = 0; i < data.length; i++) {
     //row
     let row = document.createElement('div')
     row.setAttribute(
       'class',
-      'row mb-3 border rounded align-items-baseline py-4'
+      'row mb-3 border rounded-5 align-items-baseline py-4'
     )
+    row.setAttribute('id', 'rowPatient')
 
+    //colored background
     if (i % 2 === 0) {
-      row.classList.add('bg-light')
+      row.classList.add('bg-custom2')
+    } else {
+      row.classList.add('bg-custom1')
+      row.classList.add('text-light')
     }
 
     //col - img
@@ -57,41 +63,49 @@ const printData = (data) => {
 
     //col name
     let colName = document.createElement('div')
-    colName.setAttribute('class', 'col-3 fs-4 fw-semibold')
-    colName.innerText =
-      data[i].name.title + ' ' + data[i].name.first + ' ' + data[i].name.last
+    colName.setAttribute('class', 'col-3 fs-5 fw-semibold')
+    colName.innerText = data[i].name.first + ' ' + data[i].name.last
 
-    //col bed
-    let colBed = document.createElement('p')
-    colBed.setAttribute('class', 'col-1 fs-4 fw-semibold')
-    colBed.innerText = randomBed()
+    //col room
+    let colRoom = document.createElement('p')
+    colRoom.setAttribute('class', 'col-1 fs-5 fw-semibold text-start ps-4')
+    colRoom.innerText = randomRoom()
 
     //col diagnosis
     let colDx = document.createElement('p')
-    colDx.setAttribute('class', 'col-5 fs-5 fw-semibold')
+    colDx.setAttribute('class', 'col-5 fs-6 fw-semibold')
     colDx.innerText = randomDiagnosis()
 
     //col actions
     let divAction = document.createElement('div')
-    divAction.setAttribute('class', 'col-2')
+    divAction.setAttribute('class', 'col-2 text-start')
 
+    //div with action
     let colView = document.createElement('i')
-    colView.setAttribute('class', 'fa-regular fa-eye fs-2 px-3')
+    colView.setAttribute('class', 'fa-regular fa-eye fs-3 px-2 icon icon-view')
+    colView.setAttribute('id', 'view')
     let colEdit = document.createElement('i')
-    colEdit.setAttribute('class', 'fa-regular fa-pen-to-square fs-2 px-3')
+    colEdit.setAttribute(
+      'class',
+      'fa-regular fa-pen-to-square fs-3 px-2 icon icon-edit'
+    )
     let colDel = document.createElement('i')
-    colDel.setAttribute('class', 'fa-solid fa-trash fs-2 px-3')
+    colDel.setAttribute('class', 'fa-solid fa-trash fs-3 px-2 icon icon-delete')
     divAction.appendChild(colView)
     divAction.appendChild(colEdit)
     divAction.appendChild(colDel)
 
     row.appendChild(colImg) // img
     row.appendChild(colName) // name
-    row.appendChild(colBed) // bed
+    row.appendChild(colRoom) // room
     row.appendChild(colDx) // diagnosis
-    row.appendChild(divAction)
+    row.appendChild(divAction) //actions
+    row.addEventListener('click', () => showData(data[i]))
     grid.appendChild(row) // ENTIRE ROW
   }
 }
 
 fetchData()
+const showData = (data) => {
+  console.log(data)
+}

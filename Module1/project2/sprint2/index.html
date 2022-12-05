@@ -14,6 +14,7 @@
       src="https://kit.fontawesome.com/2f1a5ebe77.js"
       crossorigin="anonymous"
     ></script>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <div class="container-fluid">
@@ -70,7 +71,10 @@
             </ul>
           </nav>
         </aside>
-        <main class="col-9 col-md-8 col-lg-9 p-lg-5" id="col">
+        <main class="col-9 col-md-8 col-lg-9 p-lg-5 bg-secondary" id="col">
+
+
+
           <div class="row">
             <div class="col-6">
               <h1 class="">
@@ -78,7 +82,7 @@
                 <i class="fa-solid fa-hospital-user fs-2"></i>
             </div>
             <div class="col-6">
-              <button class="btn btn-success">
+              <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalNewPatient">
                 <i class="fa-solid fa-plus"></i>
                 New Patient
               </button>
@@ -95,16 +99,35 @@
               <h5>Name</h5>
             </div>
             <div class="col-1">
-              <h5>Bed</h5>
+              <h5>Room</h5>
             </div>
             <div class="col-5">
               <h5>Diagnosis</h5>
             </div>
-            <div class="col-2">
+            <div class="col-1 ms-3">
               <h5>actions</h5>
             </div>
           </div>
         </main>
+        
+      </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="modalNewPatient" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">New Patient</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-success">Add new patient</button>
+          </div>
+        </div>
       </div>
     </div>
     <script src="main.js"></script>
