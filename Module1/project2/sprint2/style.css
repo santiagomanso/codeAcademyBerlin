@@ -84,3 +84,7 @@ a:focus {
     rgba(145, 151, 159, 1) 100%
   );
 }
+
+#rowPatient:hover {
+  cursor: pointer;
+}

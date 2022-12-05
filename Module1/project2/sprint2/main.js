@@ -3,6 +3,7 @@ const randomRoom = () => {
   return Math.floor(Math.random() * 10 + 1)
 }
 
+//random diagnosis function
 const randomDiagnosis = () => {
   const diagnosis = [
     'Mononucleosis',
@@ -105,7 +106,22 @@ const printData = (data) => {
   }
 }
 
-fetchData()
 const showData = (data) => {
-  console.log(data)
+  //get modal
+  const modalShow = new bootstrap.Modal('#modalViewPatient')
+
+  //get modal body
+  let modalBody = document.getElementById('modal-body')
+
+  //create html elements
+  let h2 = document.createElement('h2')
+  h2.innerText = data.name.first + ' ' + data.name.last
+
+  //append to modal body
+  modalBody.appendChild(h2)
+
+  //show modal
+  modalShow.show()
 }
+
+fetchData()
