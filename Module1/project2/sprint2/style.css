@@ -68,23 +68,44 @@ a:focus {
 }
 
 .bg-custom1 {
-  background: rgb(88, 87, 87);
+  background: rgb(112, 140, 157);
   background: linear-gradient(
     140deg,
-    rgba(88, 87, 87, 1) 0%,
-    rgba(145, 164, 182, 1) 100%
+    rgba(112, 140, 157, 1) 0%,
+    rgba(255, 255, 255, 1) 62%,
+    rgba(207, 226, 230, 1) 100%
   );
 }
 
 .bg-custom2 {
-  background: rgb(227, 231, 225);
+  background: rgb(77, 76, 74);
   background: linear-gradient(
-    140deg,
-    rgba(227, 231, 225, 1) 0%,
-    rgba(145, 151, 159, 1) 100%
+    84deg,
+    rgba(77, 76, 74, 1) 0%,
+    rgba(161, 157, 144, 1) 100%
   );
+  color: white; /* font color */
 }
 
 #rowPatient:hover {
   cursor: pointer;
+}
+
+.card:hover {
+  cursor: pointer;
+}
+
+img {
+  border-radius: 100%;
+}
+
+.card {
+  height: 150px;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px) scale(1.03);
+  opacity: 1;
 }

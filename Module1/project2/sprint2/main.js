@@ -3,6 +3,12 @@ const randomRoom = () => {
   return Math.floor(Math.random() * 10 + 1)
 }
 
+const randomLastNurse = async () => {
+  const randomNurse = await fetch('https://randomuser.me/api/')
+    .then((res) => res.json())
+    .then((data) => data.results)
+}
+
 //random diagnosis function
 const randomDiagnosis = () => {
   const diagnosis = [
@@ -19,7 +25,7 @@ const randomDiagnosis = () => {
     'Gonalgie',
     'Hemorrhagic Shock',
     'L3 - Hernia',
-    'Thymoid stage IV carninoma',
+    'Thymoid carninoma',
     'Leukemia',
     'Chemo session #5',
   ]
@@ -28,85 +34,85 @@ const randomDiagnosis = () => {
 }
 
 const fetchData = async () => {
-  await fetch('https://randomuser.me/api/?results=200')
+  await fetch('https://randomuser.me/api/?results=50')
     .then((res) => res.json())
     .then((data) => printData(data.results))
 }
 
 const printData = (data) => {
-  // console.log('data', data)
-  let grid = document.getElementById('col')
+  // console.log('data', data[0])
 
+  //create html elements - Note: i will use horizontal card component from bootstrap
+
+  let main = document.getElementById('main') //main
   for (let i = 0; i < data.length; i++) {
-    //row
-    let row = document.createElement('div')
-    row.setAttribute(
+    let row = document.createElement('div') //row
+    row.setAttribute('class', 'row g-0')
+    let card = document.createElement('div') // card
+    card.setAttribute(
       'class',
-      'row mb-3 border rounded-5 align-items-baseline py-4'
+      'card mx-2 my-3 rounded-5 animate__animated animate__fadeIn'
     )
-    row.setAttribute('id', 'rowPatient')
+    card.setAttribute('style', 'max-width: 400px;')
 
-    //colored background
+    let leftCol = document.createElement('div') //left column
+    leftCol.setAttribute(
+      'class',
+      'col-4 d-flex justify-items-center align-items-center'
+    )
+
+    let rightCol = document.createElement('div') //right column
+    rightCol.setAttribute('class', 'col-8')
+
+    let img = document.createElement('img') // img
+    img.setAttribute('src', data[i].picture.large)
+    img.setAttribute('style', 'max-width:150px; max-height: 150px')
+
+    let cardBody = document.createElement('div') //card-body
+    cardBody.setAttribute('class', 'card-body')
+
+    let cardTitle = document.createElement('h5') //card-title
+    cardTitle.setAttribute('class', 'card-title')
+    cardTitle.innerText = `${data[i].name.first} ${data[i].name.last}`
+
+    let cardText = document.createElement('p') //card-text
+    cardText.setAttribute('class', 'card-text')
+    cardText.innerText = `Patient Room: ${randomRoom()}`
+
+    let diagnosis = document.createElement('p') //diagnosis
+    diagnosis.setAttribute('class', 'card-text')
+    diagnosis.innerText = randomDiagnosis()
+
     if (i % 2 === 0) {
-      row.classList.add('bg-custom2')
+      card.classList.add('class', 'bg-custom2')
     } else {
-      row.classList.add('bg-custom1')
-      row.classList.add('text-light')
+      card.classList.add('class', 'bg-custom1')
     }
 
-    //col - img
-    let colImg = document.createElement('div')
-    colImg.setAttribute('class', 'col-1')
-    let img = document.createElement('img')
-    img.setAttribute('src', data[i].picture.medium)
-    img.setAttribute('class', 'rounded-circle')
-    colImg.appendChild(img)
+    //appends
+    leftCol.appendChild(img) // img => left column
+    row.appendChild(leftCol) // left column => row
 
-    //col name
-    let colName = document.createElement('div')
-    colName.setAttribute('class', 'col-3 fs-5 fw-semibold')
-    colName.innerText = data[i].name.first + ' ' + data[i].name.last
+    cardBody.appendChild(cardTitle) // card-title => card-body
+    cardBody.appendChild(cardText) // card-text => card-body
+    cardBody.appendChild(diagnosis)
 
-    //col room
-    let colRoom = document.createElement('p')
-    colRoom.setAttribute('class', 'col-1 fs-5 fw-semibold text-start ps-4')
-    colRoom.innerText = randomRoom()
+    rightCol.appendChild(cardBody) // card-body => right column
 
-    //col diagnosis
-    let colDx = document.createElement('p')
-    colDx.setAttribute('class', 'col-5 fs-6 fw-semibold')
-    colDx.innerText = randomDiagnosis()
+    row.appendChild(rightCol) // right column => row
 
-    //col actions
-    let divAction = document.createElement('div')
-    divAction.setAttribute('class', 'col-2 text-start')
+    card.appendChild(row) // row => card
 
-    //div with action
-    let colView = document.createElement('i')
-    colView.setAttribute('class', 'fa-regular fa-eye fs-3 px-2 icon icon-view')
-    colView.setAttribute('id', 'view')
-    let colEdit = document.createElement('i')
-    colEdit.setAttribute(
-      'class',
-      'fa-regular fa-pen-to-square fs-3 px-2 icon icon-edit'
-    )
-    let colDel = document.createElement('i')
-    colDel.setAttribute('class', 'fa-solid fa-trash fs-3 px-2 icon icon-delete')
-    divAction.appendChild(colView)
-    divAction.appendChild(colEdit)
-    divAction.appendChild(colDel)
-
-    row.appendChild(colImg) // img
-    row.appendChild(colName) // name
-    row.appendChild(colRoom) // room
-    row.appendChild(colDx) // diagnosis
-    row.appendChild(divAction) //actions
-    row.addEventListener('click', () => showData(data[i]))
-    grid.appendChild(row) // ENTIRE ROW
+    main.appendChild(card) // card => main
+    card.addEventListener('click', (e) => showData(data[i], e))
   }
 }
 
-const showData = (data) => {
+const showData = (data, e) => {
+  console.log('random nurse:  ', randomLastNurse())
+  e.stopPropagation()
+  let title = document.getElementById('modal-title')
+  title.innerText = data.name.first + ' ' + data.name.last
   //get modal
   const modalShow = new bootstrap.Modal('#modalViewPatient')
 
@@ -114,11 +120,34 @@ const showData = (data) => {
   let modalBody = document.getElementById('modal-body')
 
   //create html elements
-  let h2 = document.createElement('h2')
-  h2.innerText = data.name.first + ' ' + data.name.last
+  let room = document.createElement('p')
+  room.innerText = `Room: ${randomRoom()}  Diagnosis: ${randomDiagnosis()}`
+
+  let img = document.createElement('img')
+  img.setAttribute('src', data.picture.large)
+
+  let row = document.createElement('div')
+  row.setAttribute('class', 'row')
+
+  let leftCol = document.createElement('div')
+  leftCol.setAttribute('class', 'col-4')
+
+  let rightCol = document.createElement('div')
+  rightCol.setAttribute('class', 'col-8')
+
+  let info = document.createElement('span')
+  info.setAttribute('class', 'card-text')
+  info.innerText = 'Date of Admission: XX/XX/XXXX'
+
+  //appends
+  leftCol.appendChild(img)
+  rightCol.appendChild(info)
+
+  row.appendChild(leftCol)
+  row.appendChild(rightCol)
 
   //append to modal body
-  modalBody.appendChild(h2)
+  modalBody.appendChild(row)
 
   //show modal
   modalShow.show()
