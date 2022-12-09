@@ -1,0 +1,107 @@
+<div class="row">
+  <!-- left column -->
+  <div class="col-md-5">
+    <h5>Pacient Information</h5>
+    <p class="text-muted">
+      Type the information of the patient according to the inputs on the right
+      side of this window, first three inputs fields are for basic information
+      like name and last name
+    </p>
+  </div>
+
+  <!-- right column -->
+  <div class="col-md-7">
+    <label for="firstName">First Name</label>
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        id="firstName"
+        class="form-control"
+        placeholder="Enter frst name"
+      />
+    </div>
+    <label for="lastName">Last Name</label>
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        id="lastName"
+        class="form-control"
+        placeholder="Enter last name"
+      />
+    </div>
+    <label for="lastName">Date of birth</label>
+    <div class="input-group mb-3">
+      <input
+        type="date"
+        id="dob"
+        class="form-control"
+        placeholder="Date of birth"
+      />
+    </div>
+  </div>
+</div>
+<hr class="my-4" />
+
+    <label for="underage">Underage (-18 years old)</label>
+    <div class="input-group">
+      <div class="input-group-text">
+        <input
+          class="form-check-input mt-0"
+          type="radio"
+          id="underage"
+          value="no"
+          aria-label="Radio button for following text input"
+        />
+      </div>
+      <input
+        type="text"
+        class="form-control"
+        aria-label="Text input with radio button"
+        placeholder="Guardian name and lastname"
+      />
+    </div>
+    <label for="phone" class="mt-2">Guardian's Phone number</label>
+    <div class="input-group mb-3">
+      <input
+        type="tel"
+        id="guardianPhone"
+        class="form-control"
+        placeholder="Guardian's phone numberr"
+      />
+    </div>
+  </div>
+</div>
+<hr class="my-4" />
+<div class="row">
+  <!-- left column -->
+  <div class="col-md-5">
+    <h5>Intensive Care Unit</h5>
+    <p class="text-muted">
+      Provide relevant information for health personel, such as admition date
+      (DD/MM/YYYY format), Room number, diagnosis and if there is already an
+      assign nurse for this patient. More info on
+    </p>
+  </div>
+
+  <!-- right column -->
+  <div class="col-md-7">
+    <label for="diagnosis">Diagnosis</label>
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        id="diagnosis goes here"
+        class="form-control"
+        placeholder="Diagnosis"
+      />
+    </div>
+    <label for="roomNumber">Unit/Room number</label>
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        id="roomNumber"
+        class="form-control"
+        placeholder="Where is the patient located"
+      />
+    </div>
+  </div>
+</div>

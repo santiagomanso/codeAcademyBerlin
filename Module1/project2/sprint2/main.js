@@ -1,10 +1,30 @@
+// global variable ready to be pushed, filtered and removed.
+let patients
+
+// main fn Fetch data
+const fetchData = () => {
+  fetch('https://randomuser.me/api/?results=10')
+    .then((res) => res.json())
+    .then((data) => {
+      patients = data.results.map((item) => {
+        return {
+          ...item,
+          room: randomRoom(),
+          diagnosis: randomDiagnosis(),
+        }
+      })
+      controller(patients)
+    })
+}
+
 // random bed function
 const randomRoom = () => {
   return Math.floor(Math.random() * 10 + 1)
 }
 
-const randomLastNurse = async () => {
-  const randomNurse = await fetch('https://randomuser.me/api/')
+//random nurse fn
+const randomLastNurse = () => {
+  fetch('https://randomuser.me/api/')
     .then((res) => res.json())
     .then((data) => data.results)
 }
@@ -33,13 +53,7 @@ const randomDiagnosis = () => {
   return diagnosis[Math.floor(Math.random() * 15)]
 }
 
-const fetchData = async () => {
-  await fetch('https://randomuser.me/api/?results=50')
-    .then((res) => res.json())
-    .then((data) => printData(data.results))
-}
-
-const printData = (data) => {
+const renderData = (data) => {
   // console.log('data', data[0])
 
   //create html elements - Note: i will use horizontal card component from bootstrap
@@ -77,11 +91,11 @@ const printData = (data) => {
 
     let cardText = document.createElement('p') //card-text
     cardText.setAttribute('class', 'card-text')
-    cardText.innerText = `Patient Room: ${randomRoom()}`
+    cardText.innerText = `Patient Room: ${data[i].room}`
 
     let diagnosis = document.createElement('p') //diagnosis
     diagnosis.setAttribute('class', 'card-text')
-    diagnosis.innerText = randomDiagnosis()
+    diagnosis.innerText = data[i].diagnosis
 
     if (i % 2 === 0) {
       card.classList.add('class', 'bg-custom2')
@@ -104,13 +118,23 @@ const printData = (data) => {
     card.appendChild(row) // row => card
 
     main.appendChild(card) // card => main
+
     card.addEventListener('click', (e) => showData(data[i], e))
   }
 }
 
+const controller = (data) => {
+  console.log('data', data[2])
+  //render data
+  renderData(data)
+
+  //new patient
+  const btnNewPatient = document.getElementById('btnNewPatient')
+  btnNewPatient.addEventListener('click', (e) => newPatient(e))
+}
+
+// show modal fn
 const showData = (data, e) => {
-  console.log('random nurse:  ', randomLastNurse())
-  e.stopPropagation()
   let title = document.getElementById('modal-title')
   title.innerText = data.name.first + ' ' + data.name.last
   //get modal
@@ -121,7 +145,7 @@ const showData = (data, e) => {
 
   //create html elements
   let room = document.createElement('p')
-  room.innerText = `Room: ${randomRoom()}  Diagnosis: ${randomDiagnosis()}`
+  room.innerText = data.room
 
   let img = document.createElement('img')
   img.setAttribute('src', data.picture.large)
@@ -151,6 +175,29 @@ const showData = (data, e) => {
 
   //show modal
   modalShow.show()
+}
+
+//add new patient fn
+const newPatient = () => {
+  // cell
+  // diagnosis
+  // dob{}
+  // email
+  // gender
+  // id{}
+  // phone
+  // picture{}
+  // registered{}
+  // room
+
+  //get HTML values from imputs
+  let name = document.getElementById('firstName').value
+  let lastName = document.getElementById('lastName').value
+  let dob = document.getElementById('dob').value
+  let patientPhone = document.getElementById('phone').value
+  let patientEmail = document.getElementById('email').value
+  let underAge = document.getElementById('underage').checked
+  console.log('Patient', dob)
 }
 
 fetchData()
