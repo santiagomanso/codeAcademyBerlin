@@ -14,7 +14,7 @@
       src="https://kit.fontawesome.com/2f1a5ebe77.js"
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="container-fluid">
@@ -72,28 +72,28 @@
           </nav>
         </aside>
         <main class="col-9 col-md-8 col-lg-9 p-lg-5 bg-secondary" id="col">
-
-
-
           <div class="row">
             <div class="col-6">
               <h1 class="">
                 Patients
                 <i class="fa-solid fa-hospital-user fs-2"></i>
+              </h1>
             </div>
             <div class="col-6">
-              <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalNewPatient">
+              <button
+                class="btn btn-warning"
+                data-bs-toggle="modal"
+                data-bs-target="#modalNewPatient"
+              >
                 <i class="fa-solid fa-plus"></i>
                 New Patient
               </button>
             </div>
           </div>
-          </h1>
+
           <div class="row" id="row">
             <div class="col-1">
-              <h5>
-                Image
-              </h5>
+              <h5>Image</h5>
             </div>
             <div class="col-3">
               <h5>Name</h5>
@@ -109,41 +109,70 @@
             </div>
           </div>
         </main>
-        
       </div>
     </div>
     <!-- Modal NEW patient -->
-    <div class="modal fade" id="modalNewPatient" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div
+      class="modal fade"
+      id="modalNewPatient"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="exampleModalLabel">New Patient</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
-          <div class="modal-body">
-            
-          </div>
+          <div class="modal-body"></div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-success">Add new patient</button>
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-success">
+              Add new patient
+            </button>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Modal VIEW patient -->
-    <div class="modal fade" id="modalViewPatient" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div
+      class="modal fade"
+      id="modalViewPatient"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="exampleModalLabel">Patient</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
-          <div class="modal-body" id="modal-body">
-            
-          </div>
+          <div class="modal-body" id="modal-body"></div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
               Close
             </button>
             <button type="button" class="btn btn-success">Send Home</button>
