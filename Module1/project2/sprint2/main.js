@@ -53,6 +53,7 @@ const randomDiagnosis = () => {
   return diagnosis[Math.floor(Math.random() * 15)]
 }
 
+//render data to DOM (not-modal)
 const renderData = (data) => {
   // console.log('data', data[0])
 
@@ -67,7 +68,7 @@ const renderData = (data) => {
       'class',
       'card mx-2 my-3 rounded-5 animate__animated animate__fadeIn'
     )
-    card.setAttribute('style', 'max-width: 400px;')
+    card.setAttribute('style', 'max-width: 350px;')
 
     let leftCol = document.createElement('div') //left column
     leftCol.setAttribute(
@@ -83,7 +84,7 @@ const renderData = (data) => {
     img.setAttribute('style', 'max-width:150px; max-height: 150px')
 
     let cardBody = document.createElement('div') //card-body
-    cardBody.setAttribute('class', 'card-body')
+    cardBody.setAttribute('class', 'card-body px-4 py-3')
 
     let cardTitle = document.createElement('h5') //card-title
     cardTitle.setAttribute('class', 'card-title')
@@ -140,15 +141,126 @@ const showData = (data, e) => {
   //get modal
   const modalShow = new bootstrap.Modal('#modalViewPatient')
 
+  //region
   //get modal body
   let modalBody = document.getElementById('modal-body')
+  modalBody.innerHTML = ''
+
+  //create view modal
+  let nav = document.createElement('nav')
+  modalBody.appendChild(nav)
+
+  //nav-tabs div
+  let navTabs = document.createElement('div')
+  navTabs.setAttribute('class', 'nav nav-tabs')
+  navTabs.setAttribute('id', 'nav-tab')
+  navTabs.setAttribute('role', 'tablist')
+  nav.appendChild(navTabs)
+
+  //nav-tabs buttons general-info
+  let btnGeneral = document.createElement('button')
+  btnGeneral.setAttribute('class', 'nav-link active')
+  btnGeneral.setAttribute('id', 'nav-general-info-tab')
+  btnGeneral.setAttribute('data-bs-toggle', 'tab')
+  btnGeneral.setAttribute('data-bs-target', '#nav-general-info')
+  btnGeneral.setAttribute('type', 'button')
+  btnGeneral.setAttribute('role', 'tab')
+  btnGeneral.setAttribute('aria-controls', 'nav-general-info')
+  btnGeneral.setAttribute('aria-selected', 'true')
+  btnGeneral.innerText = '1 - General info'
+  navTabs.appendChild(btnGeneral)
+
+  //nav-tabs buttons contact-info
+  let btnContactInfo = document.createElement('button')
+  btnContactInfo.setAttribute('class', 'nav-link')
+  btnContactInfo.setAttribute('id', 'nav-general-info-tab')
+  btnContactInfo.setAttribute('data-bs-toggle', 'tab')
+  btnContactInfo.setAttribute('data-bs-target', '#nav-contact-info')
+  btnContactInfo.setAttribute('type', 'button')
+  btnContactInfo.setAttribute('role', 'tab')
+  btnContactInfo.setAttribute('aria-controls', 'nav-contact-info')
+  btnContactInfo.setAttribute('aria-selected', 'false')
+  btnContactInfo.innerText = '2 - Contact information'
+  navTabs.appendChild(btnContactInfo)
+
+  //nav-tabs buttons nav-icu-info-tab
+  let btnIcu = document.createElement('button')
+  btnIcu.setAttribute('class', 'nav-link')
+  btnIcu.setAttribute('id', 'nav-icu-info-tab')
+  btnIcu.setAttribute('data-bs-toggle', 'tab')
+  btnIcu.setAttribute('data-bs-target', '#nav-icu-info')
+  btnIcu.setAttribute('type', 'button')
+  btnIcu.setAttribute('role', 'tab')
+  btnIcu.setAttribute('aria-controls', 'nav-icu-info')
+  btnIcu.setAttribute('aria-selected', 'false')
+  btnIcu.innerText = '3 - Intensive care unit'
+  navTabs.appendChild(btnIcu)
+
+  //tab-content, goes into modal-body
+  let tabContent = document.createElement('div')
+  tabContent.setAttribute('class', 'tab-content')
+  tabContent.setAttribute('id', 'nav-tabContent')
+  modalBody.appendChild(tabContent)
+
+  //content
+  let generalInfo = document.createElement('div')
+  generalInfo.setAttribute('class', 'tab-pane fade show active p-3')
+  generalInfo.setAttribute('id', 'nav-general-info')
+  generalInfo.setAttribute('role', 'tabpanel')
+  generalInfo.setAttribute('aria-labelledby', 'nav-general-info-tab')
+  tabContent.appendChild(generalInfo) //apend to tabContent
+
+  let rowGeneral = document.createElement('div')
+  rowGeneral.setAttribute('class', 'row')
+  generalInfo.appendChild(rowGeneral) //append to row
+
+  //LEFT COL general info
+  let colGeneralInfoLeft = document.createElement('div')
+  colGeneralInfoLeft.setAttribute('class', 'col-md-5')
+  rowGeneral.appendChild(colGeneralInfoLeft) //append to
+
+  //left header info H5
+  let leftHeaderGeneralInfo = document.createElement('h5')
+  leftHeaderGeneralInfo.innerText = 'Pacient Information'
+  colGeneralInfoLeft.appendChild(leftHeaderGeneralInfo)
+
+  let leftHeaderGeneralInfoText = document.createElement('p')
+  leftHeaderGeneralInfoText.setAttribute('class', 'text-muted')
+  leftHeaderGeneralInfoText.innerText =
+    'Here you will find the contact information of the patient as well as the profile picture, to see room and full diagnosis click on: 3-Intensive Care Unit'
+  colGeneralInfoLeft.appendChild(leftHeaderGeneralInfoText)
+
+  let img = document.createElement('img')
+  img.setAttribute('src', data.picture.large)
+  img.setAttribute('width', '150px')
+  img.setAttribute('height', '150px')
+  //colGeneralInfoLeft.appendChild(img) //img to colGeneralInfoLeft
+
+  // RIGHT COL general info
+  let colGeneralInfoRight = document.createElement('div')
+  colGeneralInfoRight.setAttribute('class', 'col-md-7')
+  rowGeneral.appendChild(colGeneralInfoRight)
+
+  let generalInfoLabelName = document.createElement('label') //label name
+  generalInfoLabelName.setAttribute('for', 'firstName')
+  generalInfoLabelName.innerHTML = 'First Name'
+  colGeneralInfoRight.appendChild(generalInfoLabelName)
+
+  let generalInfoRightDiv = document.createElement('div') //div where input goes
+  generalInfoRightDiv.setAttribute('class', 'input-group mb-3')
+  colGeneralInfoRight.appendChild(generalInfoRightDiv)
+
+  let GeneralInfoRightInputName = document.createElement('input')
+  GeneralInfoRightInputName.setAttribute('type', 'text')
+  GeneralInfoRightInputName.setAttribute('id', 'firstName')
+  GeneralInfoRightInputName.setAttribute('class', 'form-control') //text muted when viewing ;)
+  GeneralInfoRightInputName.disabled = true
+  GeneralInfoRightInputName.value = `${data.name.first} ${data.name.last}`
+  generalInfoRightDiv.appendChild(GeneralInfoRightInputName)
 
   //create html elements
   let room = document.createElement('p')
   room.innerText = data.room
-
-  let img = document.createElement('img')
-  img.setAttribute('src', data.picture.large)
 
   let row = document.createElement('div')
   row.setAttribute('class', 'row')
@@ -163,41 +275,53 @@ const showData = (data, e) => {
   info.setAttribute('class', 'card-text')
   info.innerText = 'Date of Admission: XX/XX/XXXX'
 
-  //appends
-  leftCol.appendChild(img)
-  rightCol.appendChild(info)
-
-  row.appendChild(leftCol)
-  row.appendChild(rightCol)
-
-  //append to modal body
-  modalBody.appendChild(row)
-
   //show modal
   modalShow.show()
 }
 
 //add new patient fn
 const newPatient = () => {
-  // cell
+  //name
+
+  let name = {
+    first: document.getElementById('firstName').value,
+    last: document.getElementById('lastName').value,
+    title: '',
+  }
+
   // diagnosis
-  // dob{}
+  let diagnosis = document.getElementById('diagnosis').value
+
+  // date of birth
+  let dob = {
+    age: 22, //calculation of age (????)
+    date: document.getElementById('dob').value,
+  }
   // email
+  let patientEmail = document.getElementById('email').value
   // gender
+
   // id{}
+
   // phone
+  let phone = document.getElementById('phone').value
+
   // picture{}
+  let picture = {
+    small: document.getElementById('inputPicture').files[0],
+    medium: document.getElementById('inputPicture').files[0],
+    large: document.getElementById('inputPicture').files[0],
+  }
+
   // registered{}
+
   // room
+  let room = document.getElementById('room').value
 
   //get HTML values from imputs
-  let name = document.getElementById('firstName').value
-  let lastName = document.getElementById('lastName').value
-  let dob = document.getElementById('dob').value
-  let patientPhone = document.getElementById('phone').value
-  let patientEmail = document.getElementById('email').value
-  let underAge = document.getElementById('underage').checked
-  console.log('Patient', dob)
+
+  // let underAge = document.getElementById('underage').checked
+  console.log('Patient', picture)
 }
 
 fetchData()

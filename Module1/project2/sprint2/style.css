@@ -110,6 +110,6 @@ img {
   opacity: 1;
 }
 
-#newPatient {
+.modal-dialog {
   max-width: 50% !important;
 }
