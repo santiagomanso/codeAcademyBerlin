@@ -167,19 +167,26 @@
               >
                 <div class="row">
                   <!-- left column -->
-                  <div class="col-md-5">
-                    <h5>Pacient Information</h5>
+                  <div class="col-md-5 d-flex flex-column align-items-center">
+                    <h5>Patient Information</h5>
                     <p class="text-muted">
                       Type the information of the patient according to the
                       inputs on the right side of this window, first three
                       inputs fields are for basic information like name and last
                       name
                     </p>
+                    <img
+                      src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg"
+                      alt="dafultUser"
+                      width="200"
+                      height="200"
+                      id="profilePicture"
+                    />
                   </div>
 
                   <!-- right column -->
                   <div class="col-md-7">
-                    <label for="firstName">First Name</label>
+                    <label for="firstName">First Name *</label>
                     <div class="input-group mb-3">
                       <input
                         type="text"
@@ -188,7 +195,7 @@
                         placeholder="Enter frst name"
                       />
                     </div>
-                    <label for="lastName">Last Name</label>
+                    <label for="lastName">Last Name *</label>
                     <div class="input-group mb-3">
                       <input
                         type="text"
@@ -197,7 +204,7 @@
                         placeholder="Enter last name"
                       />
                     </div>
-                    <label for="lastName">Date of birth</label>
+                    <label for="lastName">Date of birth *</label>
                     <div class="input-group mb-3">
                       <input
                         type="date"
@@ -207,41 +214,57 @@
                       />
                     </div>
                     <div class="input-group mb-3">
-                      <div class="form-check form-check-inline">
-                        <input
-                          class="form-check-input"
-                          type="checkbox"
-                          name="gender"
-                          id="checkMale"
-                          value="male"
-                        />
-                        <label class="form-check-label" for="checkMale">
-                          Male</label
-                        >
-                      </div>
-                      <div class="form-check form-check-inline">
-                        <input
-                          class="form-check-input"
-                          type="checkbox"
-                          name="gender"
-                          id="checkFemale"
-                          value="option2"
-                        />
-                        <label class="form-check-label" for="inlineCheckbox1"
-                          >Female</label
-                        >
-                      </div>
-                      <div class="form-check form-check-inline mb-3">
-                        <input
-                          class="form-check-input"
-                          type="checkbox"
-                          name="gender"
-                          id="checkDiverse"
-                          value="option3"
-                        />
-                        <label class="form-check-label" for="inlineCheckbox1">
-                          Diverse
-                        </label>
+                      <div class="d-flex flex-column">
+                        <label for="gender">Gender *</label>
+                        <div>
+                          <div class="form-check form-check-inline">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              name="gender"
+                              id="checkMale"
+                              value="male"
+                            />
+                            <label
+                              class="form-check-label"
+                              id="labelMale"
+                              for="checkMale"
+                            >
+                              Male</label
+                            >
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              name="gender"
+                              id="checkFemale"
+                              value="option2"
+                            />
+                            <label
+                              class="form-check-label"
+                              id="labelFemale"
+                              for="inlineCheckbox1"
+                              >Female</label
+                            >
+                          </div>
+                          <div class="form-check form-check-inline mb-3">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              name="gender"
+                              id="checkDiverse"
+                              value="option3"
+                            />
+                            <label
+                              class="form-check-label"
+                              id="labelDiverse"
+                              for="inlineCheckbox1"
+                            >
+                              Diverse
+                            </label>
+                          </div>
+                        </div>
                       </div>
                       <div>
                         <label for="lastName">Patient's picture</label>
@@ -336,7 +359,7 @@
                     <div class="input-group mb-3">
                       <input
                         type="date"
-                        id="amitionDate"
+                        id="admitionDate"
                         class="form-control"
                         placeholder="Date when patient was admited to this ward"
                       />
@@ -378,22 +401,19 @@
                   </div>
                 </div>
               </div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-danger"
-                  data-bs-dismiss="modal"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-success"
-                  id="btnNewPatient"
-                >
-                  Add new patient
-                </button>
-              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-danger"
+                data-bs-dismiss="modal"
+                id="btnCancelNewPatient"
+              >
+                Cancel
+              </button>
+              <button type="button" class="btn btn-success" id="btnNewPatient">
+                Add new patient
+              </button>
             </div>
           </div>
         </div>
