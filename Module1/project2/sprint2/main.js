@@ -1,20 +1,27 @@
 // global variable ready to be pushed, filtered and removed.
-let patients
+let patients = []
 
 // main fn Fetch data
-const fetchData = () => {
-  fetch('https://randomuser.me/api/?results=10')
-    .then((res) => res.json())
-    .then((data) => {
-      patients = data.results.map((item) => {
-        return {
-          ...item,
-          room: randomRoom(),
-          diagnosis: randomDiagnosis(),
-        }
-      })
-      controller(patients)
+const fetchData = async () => {
+  const response = await fetch('https://randomuser.me/api/?results=10')
+  const { results } = await response.json()
+
+  const responses = await Promise.all(
+    results.map(async (item) => {
+      return await fetch('https://randomuser.me/api/').then((response) =>
+        response.json()
+      )
     })
+  )
+  patients = results.map((item) => {
+    return {
+      ...item,
+      room: randomRoom(),
+      diagnosis: randomDiagnosis(),
+      actualNurse: randomNurse(responses),
+    }
+  })
+  controller(patients)
 }
 
 // random bed function
@@ -23,10 +30,15 @@ const randomRoom = () => {
 }
 
 //random nurse fn
-const randomLastNurse = () => {
-  fetch('https://randomuser.me/api/')
-    .then((res) => res.json())
-    .then((data) => data.results)
+const randomNurse = (responses) => {
+  console.log('responses[0].results', responses[0].results)
+  let nurses = []
+  responses.map((item, i) => {
+    nurses.push(item.results[0].name.first + ' ' + item.results[0].name.last)
+  })
+  console.log('nurses', nurses)
+  //achievment of 13/12 random index based on the length of the array of names
+  return nurses[Math.floor(Math.random() * nurses.length)]
 }
 
 //random diagnosis function
@@ -55,8 +67,6 @@ const randomDiagnosis = () => {
 
 //render data to DOM (not-modal)
 const renderData = (data) => {
-  // console.log('data', data[0])
-
   //create html elements - Note: i will use horizontal card component from bootstrap
 
   let main = document.getElementById('main') //main
@@ -68,7 +78,7 @@ const renderData = (data) => {
       'class',
       'card mx-2 my-3 rounded-5 animate__animated animate__fadeIn'
     )
-    card.setAttribute('style', 'max-width: 350px;')
+    card.setAttribute('style', 'max-width: 350px; overflow:hidden;')
 
     let leftCol = document.createElement('div') //left column
     leftCol.setAttribute(
@@ -125,13 +135,82 @@ const renderData = (data) => {
 }
 
 const controller = (data) => {
-  console.log('data', data[2])
   //render data
+  // renderData(data)
+
+  // const nuevoArray = anhadirNuevoPaciente(data, nuevoPaciente)
+  // renderData(nuevoArray)
   renderData(data)
+
+  //event listeners to new patient gender
+  handlerGenderChange()
+
+  //event picture change
+  handlerChangePicture()
+
+  //reset new Patient modal inputs
+  handlerResetNewPatient()
 
   //new patient
   const btnNewPatient = document.getElementById('btnNewPatient')
   btnNewPatient.addEventListener('click', (e) => newPatient(e))
+}
+
+const handlerChangePicture = () => {
+  const inputPicture = document.getElementById('inputPicture')
+  let img = document.getElementById('profilePicture')
+  inputPicture.addEventListener('change', () => {
+    img.src = inputPicture.value
+  })
+}
+
+const handlerResetNewPatient = () => {
+  const btn = document.getElementById('btnCancelNewPatient')
+  btn.addEventListener('click', () => {
+    //resets values
+    document.getElementById('firstName').value = ''
+    document.getElementById('lastName').value = ''
+    document.getElementById('dob').value = ''
+    document.getElementById('phone').value = ''
+    document.getElementById('email').value = ''
+    document.getElementById('diagnosis').value = ''
+    document.getElementById('admitionDate').value = ''
+    document.getElementById('room').value = ''
+  })
+}
+
+const handlerGenderChange = () => {
+  //get HTML elements
+  //checkboxex
+  let male = document.getElementById('checkMale')
+  let female = document.getElementById('checkFemale')
+  let diverse = document.getElementById('checkDiverse')
+  //labels
+  let labelMale = document.getElementById('labelMale')
+  let labelFemale = document.getElementById('labelFemale')
+  let labelDiverse = document.getElementById('labelDiverse')
+
+  male.addEventListener('click', () => {
+    female.checked = false
+    diverse.checked = false
+    labelFemale.setAttribute('class', 'text-muted')
+    labelDiverse.setAttribute('class', 'text-muted')
+    labelMale.classList.remove('text-muted')
+  })
+  female.addEventListener('click', () => {
+    male.checked = false
+    diverse.checked = false
+    labelMale.setAttribute('class', 'text-muted')
+    labelDiverse.setAttribute('class', 'text-muted')
+    labelFemale.classList.remove('text-muted')
+  })
+  diverse.addEventListener('click', () => {
+    female.checked = false
+    male.checked = false
+    labelFemale.setAttribute('class', 'text-muted')
+    labelMale.setAttribute('class', 'text-muted')
+    labelDiverse.classList.remove('text-muted')
+  })
 }
 
 // show modal fn
@@ -464,7 +543,7 @@ const showData = (data, e) => {
   contactInfoRightInputEmail.value = data.email
   contactInfoDivEmail.appendChild(contactInfoRightInputEmail)
 
-  //---------------------------- TAB CONTENT (contact info) ----------------------------
+  //---------------------------- TAB CONTENT (Intensive Care Unit) ----------------------------
 
   //content ICU
   //content ICU TAB
@@ -539,53 +618,70 @@ const showData = (data, e) => {
   icuDivRoomInput.value = data.room
   icuDivRoom.appendChild(icuDivRoomInput)
 
+  //Nurse
+  let icuNurseLabel = document.createElement('label') //label name
+  icuNurseLabel.setAttribute('for', 'nurse')
+  icuNurseLabel.innerHTML = 'Actual Nurse'
+  colIcuRight.appendChild(icuNurseLabel)
+
+  let icuDivNurse = document.createElement('div') //div where input goes
+  icuDivNurse.setAttribute('class', 'input-group mb-3')
+  colIcuRight.appendChild(icuDivNurse)
+
+  let icuDivNurseInput = document.createElement('input') //input name
+  icuDivNurseInput.setAttribute('type', 'text')
+  icuDivNurseInput.setAttribute('id', 'firstName')
+  icuDivNurseInput.setAttribute('class', 'form-control') //text muted when viewing ;)
+  icuDivNurseInput.disabled = true
+  icuDivNurseInput.value = data.actualNurse
+  icuDivNurse.appendChild(icuDivNurseInput)
+
   //show modal
   modalShow.show()
 }
 
 //add new patient fn
 const newPatient = () => {
-  //name
-
-  let name = {
-    first: document.getElementById('firstName').value,
-    last: document.getElementById('lastName').value,
-    title: '',
+  let gender
+  let male = document.getElementById('checkMale')
+  let female = document.getElementById('checkFemale')
+  let diverse = document.getElementById('checkDiverse')
+  if (male.checked) {
+    gender = 'male'
+  }
+  if (female.checked) {
+    gender = 'male'
+  }
+  if (diverse.checked) {
+    gender = 'male'
   }
 
-  // diagnosis
-  let diagnosis = document.getElementById('diagnosis').value
-
-  // date of birth
-  let dob = {
-    age: 22, //calculation of age (????)
-    date: document.getElementById('dob').value,
-  }
-  // email
-  let patientEmail = document.getElementById('email').value
-  // gender
-
-  // id{}
-
-  // phone
-  let phone = document.getElementById('phone').value
-
-  // picture{}
-  let picture = {
-    small: document.getElementById('inputPicture').files[0],
-    medium: document.getElementById('inputPicture').files[0],
-    large: document.getElementById('inputPicture').files[0],
-  }
-
-  // registered{}
-
-  // room
-  let room = document.getElementById('room').value
-
-  //get HTML values from imputs
-
-  // let underAge = document.getElementById('underage').checked
-  console.log('Patient', picture)
+  let patient = [
+    {
+      name: {
+        first: document.getElementById('firstName').value,
+        last: document.getElementById('lastName').value,
+        title: '',
+      },
+      diagnosis: document.getElementById('diagnosis').value,
+      dob: {
+        age: 22, //calculation of age (????)
+        date: document.getElementById('dob').value,
+      },
+      gender: gender,
+      admitionDate: document.getElementById('admitionDate').value,
+      patientEmail: document.getElementById('email').value,
+      phone: document.getElementById('phone').value,
+      picture: {
+        small: "document.getElementById('inputPicture').files[0]",
+        medium: "document.getElementById('inputPicture').files[0]",
+        large: "document.getElementById('inputPicture').files[0]",
+      },
+      room: document.getElementById('room').value,
+    },
+  ]
+  renderData(patient)
+  console.log('patient', patient)
 }
 
 fetchData()
