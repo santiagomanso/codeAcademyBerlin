@@ -93,8 +93,87 @@
                 New Patient
               </button>
             </div>
-            <div class="row" id="main"></div>
+            <div class="row d-flex align-items-baseline">
+              <div class="col-2">
+                <select class="form-select" id="selectRoom" disabled>
+                  <option value="all">All Rooms</option>
+                </select>
+              </div>
+              <div class="col-4">
+                <div class="d-flex justify-content-center">
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      name="gender"
+                      id="filterCheckMale"
+                      value="male"
+                      disabled
+                    />
+                    <label
+                      class="form-check-label"
+                      id="labelMale"
+                      for="filterCheckMale"
+                    >
+                      Male</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      name="gender"
+                      id="filterCheckFemale"
+                      value="female"
+                      disabled
+                    />
+                    <label
+                      class="form-check-label"
+                      id="labelFemale"
+                      for="filterCheckFemale"
+                      >Female</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      name="gender"
+                      id="filterCheckDiverse"
+                      value="diverse"
+                      disabled
+                    />
+                    <label
+                      class="form-check-label"
+                      id="labelDiverse"
+                      for="filterCheckDiverse"
+                    >
+                      Diverse
+                    </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      name="gender"
+                      id="filterCheckAll"
+                      value="all"
+                      checked
+                      disabled
+                    />
+                    <label
+                      class="form-check-label"
+                      id="labelMale"
+                      for="filterCheckAll"
+                    >
+                      all</label
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+          <div class="row" id="main"></div>
         </main>
       </div>
     </div>
