@@ -3,7 +3,26 @@ let patients = []
 
 // main fn Fetch data
 const fetchData = async () => {
-  const response = await fetch('https://randomuser.me/api/?results=10')
+  //show spinner
+
+  const main = document.getElementById('main') //main content
+  const spinnerContainer = document.createElement('div') //create spinner
+  spinnerContainer.setAttribute('class', 'd-flex justify-content-center mt-5')
+  main.appendChild(spinnerContainer)
+
+  const spinnerBorder = document.createElement('div')
+  spinnerBorder.setAttribute('class', 'spinner-border mt-5')
+  spinnerBorder.setAttribute('role', 'status')
+  spinnerBorder.setAttribute('style', 'width: 10rem; height: 10rem;')
+  spinnerContainer.appendChild(spinnerBorder)
+
+  const spinner = document.createElement('span')
+  spinner.setAttribute('class', 'sr-only')
+  spinner.innerText = 'Loading...'
+
+  spinnerBorder.appendChild(spinner)
+
+  const response = await fetch('https://randomuser.me/api/?results=20')
   const { results } = await response.json()
 
   const responses = await Promise.all(
@@ -21,22 +40,149 @@ const fetchData = async () => {
       actualNurse: randomNurse(responses),
     }
   })
+  console.log('patients', patients)
   controller(patients)
+}
+
+const controller = (data) => {
+  //display data to DOM
+  renderData(data)
+
+  //create HTML options
+  createOptions(data)
+
+  addEvents(data)
+
+  //new patient
+  const btnNewPatient = document.getElementById('btnNewPatient')
+  btnNewPatient.addEventListener('click', (e) => newPatient(e))
+}
+
+//fn add event listeners
+const addEvents = (data) => {
+  //event listeners to new patient gender
+  handlerGenderChange()
+
+  //event picture change
+  handlerChangePicture()
+
+  //reset new Patient modal inputs
+  handlerResetNewPatient()
+
+  //add filters to the options
+  addFilters(data)
+}
+
+//create HTML options
+const createOptions = (data) => {
+  let select = document.getElementById('selectRoom') // HTML select
+  select.removeAttribute('disabled')
+
+  //function to return rooms
+  const rooms = data.map((patient) => {
+    return patient.room
+  })
+  const uniqueRooms = [...new Set(rooms)]
+
+  uniqueRooms.map((room) => {
+    let option = document.createElement('option')
+    option.setAttribute('value', `${room}`)
+    option.innerText = `Room ${room}`
+    select.appendChild(option)
+  })
+}
+
+//add filters
+const addFilters = (data) => {
+  const male = document.getElementById('filterCheckMale')
+  const female = document.getElementById('filterCheckFemale')
+  const diverse = document.getElementById('filterCheckDiverse')
+  const all = document.getElementById('filterCheckAll')
+  // select all checkboxes at once --> loop over it and add event to each element of the nodelist
+  male.removeAttribute('disabled')
+  female.removeAttribute('disabled')
+  diverse.removeAttribute('disabled')
+  all.removeAttribute('disabled')
+
+  male.addEventListener('click', (e) => {
+    console.log('e', e)
+    female.checked = false
+    diverse.checked = false
+    all.checked = false
+    male.checked = false
+    e.target.checked = true
+    if (male.checked) {
+      filterBy(data)
+    }
+  })
+
+  female.addEventListener('click', () => {
+    male.checked = false
+    diverse.checked = false
+    all.checked = false
+    if (female.checked) {
+      filterBy(data)
+    }
+  })
+
+  diverse.addEventListener('click', () => {
+    female.checked = false
+    male.checked = false
+    all.checked = false
+    if (diverse.checked) {
+      filterBy(data)
+    }
+  })
+
+  all.addEventListener('click', () => {
+    female.checked = false
+    diverse.checked = false
+    male.checked = false
+    if (all.checked) {
+      filterBy(data)
+    }
+  })
+
+  //rooms
+  document
+    .querySelector('#selectRoom')
+    .addEventListener('change', () => filterBy(data))
+}
+
+const filterBy = (data, gender) => {
+  const selectedCheckBox = document.querySelector(
+    'input[name=gender]:checked'
+  ).value
+  console.log('selectedCheckBox', selectedCheckBox)
+  //sugestion to use array of values on gender and use includes()
+  // console.log('gender', gender)
+  const optionRoom = document.getElementById('selectRoom').value
+  // console.log('optionRoom', optionRoom)
+  const filteredRooms = data.filter((patient) => {
+    // console.log('patient.gender', patient.gender)
+    return (
+      (patient.room === +optionRoom && patient.gender === selectedCheckBox) ||
+      (optionRoom === 'all' && patient.gender === selectedCheckBox) ||
+      (patient.room === +optionRoom && selectedCheckBox === 'all') ||
+      (optionRoom === 'all' && selectedCheckBox === 'all')
+    )
+  })
+  renderData(filteredRooms)
+  // console.log('filteredRooms', filteredRooms)
 }
 
 // random bed function
 const randomRoom = () => {
-  return Math.floor(Math.random() * 10 + 1)
+  return Math.floor(Math.random() * 6 + 1)
 }
 
 //random nurse fn
 const randomNurse = (responses) => {
-  console.log('responses[0].results', responses[0].results)
   let nurses = []
   responses.map((item, i) => {
     nurses.push(item.results[0].name.first + ' ' + item.results[0].name.last)
   })
-  console.log('nurses', nurses)
+
   //achievment of 13/12 random index based on the length of the array of names
   return nurses[Math.floor(Math.random() * nurses.length)]
 }
@@ -70,6 +216,7 @@ const renderData = (data) => {
   //create html elements - Note: i will use horizontal card component from bootstrap
 
   let main = document.getElementById('main') //main
+  main.innerHTML = '' //html reset
   for (let i = 0; i < data.length; i++) {
     let row = document.createElement('div') //row
     row.setAttribute('class', 'row g-0')
@@ -102,7 +249,7 @@ const renderData = (data) => {
 
     let cardText = document.createElement('p') //card-text
     cardText.setAttribute('class', 'card-text')
-    cardText.innerText = `Patient Room: ${data[i].room}`
+    cardText.innerText = `ICU - Room: ${data[i].room}`
 
     let diagnosis = document.createElement('p') //diagnosis
     diagnosis.setAttribute('class', 'card-text')
@@ -132,28 +279,6 @@ const renderData = (data) => {
 
     card.addEventListener('click', (e) => showData(data[i], e))
   }
-}
-
-const controller = (data) => {
-  //render data
-  // renderData(data)
-
-  // const nuevoArray = anhadirNuevoPaciente(data, nuevoPaciente)
-  // renderData(nuevoArray)
-  renderData(data)
-
-  //event listeners to new patient gender
-  handlerGenderChange()
-
-  //event picture change
-  handlerChangePicture()
-
-  //reset new Patient modal inputs
-  handlerResetNewPatient()
-
-  //new patient
-  const btnNewPatient = document.getElementById('btnNewPatient')
-  btnNewPatient.addEventListener('click', (e) => newPatient(e))
 }
 
 const handlerChangePicture = () => {
@@ -379,7 +504,8 @@ const showData = (data, e) => {
   GeneralInfoRightInputDOB.setAttribute('id', 'firstName')
   GeneralInfoRightInputDOB.setAttribute('class', 'form-control') //text muted when viewing ;)
   GeneralInfoRightInputDOB.disabled = true
-  GeneralInfoRightInputDOB.value = '23/12/1989' //HOW TO GET DATE HERE  new Date() constructor and parse date??
+  const stringDate = data.dob.date.split('T')[0] //split take away last part
+  GeneralInfoRightInputDOB.setAttribute('value', stringDate) //HOW TO GET DATE HERE  new Date() constructor and parse date??
   generalInfoRightDivDOB.appendChild(GeneralInfoRightInputDOB)
 
   //gender
@@ -656,32 +782,33 @@ const newPatient = () => {
     gender = 'male'
   }
 
-  let patient = [
-    {
-      name: {
-        first: document.getElementById('firstName').value,
-        last: document.getElementById('lastName').value,
-        title: '',
-      },
-      diagnosis: document.getElementById('diagnosis').value,
-      dob: {
-        age: 22, //calculation of age (????)
-        date: document.getElementById('dob').value,
-      },
-      gender: gender,
-      admitionDate: document.getElementById('admitionDate').value,
-      patientEmail: document.getElementById('email').value,
-      phone: document.getElementById('phone').value,
-      picture: {
-        small: "document.getElementById('inputPicture').files[0]",
-        medium: "document.getElementById('inputPicture').files[0]",
-        large: "document.getElementById('inputPicture').files[0]",
-      },
-      room: document.getElementById('room').value,
+  patients.push({
+    name: {
+      first: document.getElementById('firstName').value,
+      last: document.getElementById('lastName').value,
+      title: '',
     },
-  ]
-  renderData(patient)
-  console.log('patient', patient)
+    diagnosis: document.getElementById('diagnosis').value,
+    dob: {
+      age: 22, //calculation of age (????)
+      date: document.getElementById('dob').value,
+    },
+    gender: gender,
+    admitionDate: document.getElementById('admitionDate').value,
+    patientEmail: document.getElementById('email').value,
+    phone: document.getElementById('phone').value,
+    picture: {
+      small:
+        'https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg',
+      medium:
+        'https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg',
+      large:
+        'https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg',
+    },
+    room: document.getElementById('room').value,
+  })
+  //close modal rezise
+  renderData(patients)
 }
 
 fetchData()
