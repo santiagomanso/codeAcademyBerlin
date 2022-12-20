@@ -69,8 +69,33 @@ const addEvents = (data) => {
   //reset new Patient modal inputs
   handlerResetNewPatient()
 
+  //searchInput
+  const searchBar = document.getElementById('searchPatient')
+  searchBar.disabled = false //enable search
+  searchBar.addEventListener('input', (e) => handlerSearch(e))
+  searchBar.addEventListener('keyup', (e) => {
+    if (e.key === 'Enter') {
+      let name = handlerSearch(e) //return from search function
+      data.map((patient) => {
+        if (patient.name.last.toLowerCase() === name.toLowerCase()) {
+          renderData([patient]) //needs to go as array of 1
+        }
+        if (patient.name.first.toLowerCase() === name.toLowerCase()) {
+          renderData([patient]) //needs to go as array of 1
+        }
+      })
+      searchBar.value = ''
+    }
+  })
+
   //add filters to the options
   addFilters(data)
+}
+
+const handlerSearch = (e) => {
+  let name = ''
+  name = name + e.target.value
+  return name
 }
 
 //create HTML options
@@ -149,17 +174,12 @@ const addFilters = (data) => {
     .addEventListener('change', () => filterBy(data))
 }
 
-const filterBy = (data, gender) => {
-  const selectedCheckBox = document.querySelector(
+const filterBy = (data) => {
+  let selectedCheckBox = document.querySelector(
     'input[name=gender]:checked'
   ).value
-  console.log('selectedCheckBox', selectedCheckBox)
-  //sugestion to use array of values on gender and use includes()
-  // console.log('gender', gender)
   const optionRoom = document.getElementById('selectRoom').value
-  // console.log('optionRoom', optionRoom)
   const filteredRooms = data.filter((patient) => {
-    // console.log('patient.gender', patient.gender)
     return (
       (patient.room === +optionRoom && patient.gender === selectedCheckBox) ||
       (optionRoom === 'all' && patient.gender === selectedCheckBox) ||
@@ -217,7 +237,78 @@ const renderData = (data) => {
 
   let main = document.getElementById('main') //main
   main.innerHTML = '' //html reset
-  for (let i = 0; i < data.length; i++) {
+  if (data.length > 1) {
+    data.map((patient, i) => {
+      let row = document.createElement('div') //row
+      row.setAttribute('class', 'row g-0')
+      let card = document.createElement('div') // card
+      card.setAttribute(
+        'class',
+        'card mx-2 my-3 rounded-5 animate__animated animate__fadeIn'
+      )
+      card.setAttribute('style', 'max-width: 400px; overflow:hidden;')
+
+      let leftCol = document.createElement('div') //left column
+      leftCol.setAttribute(
+        'class',
+        'col-4 d-flex justify-items-center align-items-center'
+      )
+
+      let rightCol = document.createElement('div') //right column
+      rightCol.setAttribute('class', 'col-8')
+
+      let img = document.createElement('img') // img
+      img.setAttribute('src', patient.picture.large)
+      img.setAttribute('style', 'max-width:130px; max-height: 130px')
+
+      let cardBody = document.createElement('div') //card-body
+      cardBody.setAttribute('class', 'card-body px-2 py-5')
+
+      let cardTitle = document.createElement('h5') //card-title
+      cardTitle.setAttribute('class', 'card-title')
+      cardTitle.innerText = `${patient.name.first} ${patient.name.last}`
+
+      let cardText = document.createElement('p') //card-text
+      cardText.setAttribute('class', 'card-text')
+      cardText.innerText = `ICU - Room: ${patient.room}`
+
+      let diagnosisDiv = document.createElement('div')
+      diagnosisDiv.setAttribute('class', 'd-flex align-items-center')
+
+      let diagnosisIcon = document.createElement('i')
+      diagnosisIcon.setAttribute('class', 'fa-solid fa-virus mx-2')
+      diagnosisDiv.appendChild(diagnosisIcon)
+
+      let diagnosis = document.createElement('p') //diagnosis
+      diagnosis.setAttribute('class', 'card-text')
+      diagnosis.innerText = patient.diagnosis
+      diagnosisDiv.appendChild(diagnosis)
+
+      if (i % 2 === 0) {
+        card.classList.add('class', 'bg-custom2')
+      } else {
+        card.classList.add('class', 'bg-custom1')
+      }
+
+      //appends
+      leftCol.appendChild(img) // img => left column
+      row.appendChild(leftCol) // left column => row
+
+      cardBody.appendChild(cardTitle) // card-title => card-body
+      cardBody.appendChild(cardText) // card-text => card-body
+      cardBody.appendChild(diagnosisDiv)
+
+      rightCol.appendChild(cardBody) // card-body => right column
+
+      row.appendChild(rightCol) // right column => row
+
+      card.appendChild(row) // row => card
+
+      main.appendChild(card) // card => main
+
+      card.addEventListener('click', (e) => showData(data[i], e))
+    })
+  } else {
     let row = document.createElement('div') //row
     row.setAttribute('class', 'row g-0')
     let card = document.createElement('div') // card
@@ -237,7 +328,7 @@ const renderData = (data) => {
     rightCol.setAttribute('class', 'col-8')
 
     let img = document.createElement('img') // img
-    img.setAttribute('src', data[i].picture.large)
+    img.setAttribute('src', data[0].picture.large)
     img.setAttribute('style', 'max-width:150px; max-height: 150px')
 
     let cardBody = document.createElement('div') //card-body
@@ -245,21 +336,15 @@ const renderData = (data) => {
 
     let cardTitle = document.createElement('h5') //card-title
     cardTitle.setAttribute('class', 'card-title')
-    cardTitle.innerText = `${data[i].name.first} ${data[i].name.last}`
+    cardTitle.innerText = `${data[0].name.first} ${data[0].name.last}`
 
     let cardText = document.createElement('p') //card-text
     cardText.setAttribute('class', 'card-text')
-    cardText.innerText = `ICU - Room: ${data[i].room}`
+    cardText.innerText = `ICU - Room: ${data[0].room}`
 
     let diagnosis = document.createElement('p') //diagnosis
     diagnosis.setAttribute('class', 'card-text')
-    diagnosis.innerText = data[i].diagnosis
-
-    if (i % 2 === 0) {
-      card.classList.add('class', 'bg-custom2')
-    } else {
-      card.classList.add('class', 'bg-custom1')
-    }
+    diagnosis.innerText = data[0].diagnosis
 
     //appends
     leftCol.appendChild(img) // img => left column
@@ -277,7 +362,57 @@ const renderData = (data) => {
 
     main.appendChild(card) // card => main
 
-    card.addEventListener('click', (e) => showData(data[i], e))
+    card.addEventListener('click', (e) => showData(data[0], e))
+
+    //show all button
+    let row2 = document.createElement('div') //row
+    row2.setAttribute('class', 'row g-0')
+    let card2 = document.createElement('div') // card
+    card2.setAttribute(
+      'class',
+      'card mx-2 my-3 rounded-5 animate__animated animate__fadeIn'
+    )
+    card2.setAttribute('style', 'max-width: 350px; overflow:hidden;')
+
+    let leftCol2 = document.createElement('div') //left column
+    leftCol2.setAttribute(
+      'class',
+      'col-4 d-flex justify-items-center align-items-center'
+    )
+
+    let rightCol2 = document.createElement('div') //right column
+    rightCol2.setAttribute('class', 'col-8')
+
+    let img2 = document.createElement('i') // img
+    img2.setAttribute('class', 'fa-solid fa-reply-all fs-1 ps-5')
+
+    let cardBody2 = document.createElement('div') //card-body
+    cardBody2.setAttribute('class', 'card-body px-4 py-5')
+
+    let cardTitle2 = document.createElement('h5') //card-title
+    cardTitle2.setAttribute('class', 'card-title')
+    cardTitle2.innerText = `Back to All patients`
+
+    let cardText2 = document.createElement('p') //card-text
+    cardText2.setAttribute('class', 'card-text')
+    cardText2.innerText = `click here to display all patients`
+
+    //appends
+    leftCol2.appendChild(img2) // img => left column
+    row2.appendChild(leftCol2) // left column => row
+
+    cardBody2.appendChild(cardTitle2) // card-title => card-body
+    cardBody2.appendChild(cardText2) // card-text => card-body
+
+    rightCol2.appendChild(cardBody2) // card-body => right column
+
+    row2.appendChild(rightCol2) // right column => row
+
+    card2.appendChild(row2) // row => card
+
+    main.appendChild(card2) // card => main
+
+    card2.addEventListener('click', () => fetchData())
   }
 }
 
@@ -808,7 +943,9 @@ const newPatient = () => {
     room: document.getElementById('room').value,
   })
   //close modal rezise
-  renderData(patients)
+  let modal = new bootstrap.Modal(document.querySelector('#smodalNewPatient'))
+  modal.hide()
+  // renderData(patients.reverse())
 }
 
 fetchData()
